@@ -1,11 +1,11 @@
-<p align="center">
-  <a href="https://nodejs.org/en/about/releases/"><img src="https://img.shields.io/node/v/vite.svg" alt="node compatility"></a>
-  <a href="https://github.com/dianjie/tdesign-console/LICENSE">
-    <img src="https://img.shields.io/npm/l/tdesign-vue-next.svg?sanitize=true" alt="License">
-  </a>
-</p>
-
 ### 项目简介
+
+[![Vue3](https://img.shields.io/badge/Framework-Vue3-42b883)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Develop-Vite-747bff)](https://vitejs.dev)
+[![Pinia](https://img.shields.io/badge/Store-Pinia-f7d336)](https://pinia.vuejs.org)
+[![node-current](https://img.shields.io/node/v/vite)](https://nodejs.org/en/about/releases/)
+[![GitHub](https://img.shields.io/github/license/dianjie/tdesign-console)](https://github.com/dianjie/tdesign-console/blob/main/LICENSE)
 
 基于[TDesign Starter](https://github.com/tencent/tdesign-vue-next-starter)将[BladeX](https://saber.bladex.vip/)的基础后台功能全部写了出来，支持动态路由。
 
@@ -106,4 +106,4 @@ npm run build:mock
 
 ### 开源协议
 
-遵循 [MIT 协议](https://github.com/dianjie/tdesign-console/LICENSE)。
+遵循 [MIT 协议](https://github.com/dianjie/tdesign-console/blob/main/LICENSE)

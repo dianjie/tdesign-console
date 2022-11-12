@@ -83,7 +83,7 @@ npm run build
 npm run build:test
 
 ## 将mock数据打包进最终代码内
-npm run build:test
+npm run build:mock
 ```
 
 ### 兼容性

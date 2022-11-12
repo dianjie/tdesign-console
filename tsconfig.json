@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+
+    "useDefineForClassFields": true,
+
+    "forceConsistentCasingInFileNames": true,
+    // Required in Vite
+    "isolatedModules": true,
+    // For `<script setup>`
+    // See <https://devblogs.microsoft.com/typescript/announcing-typescript-4-5-beta/#preserve-value-imports>
+    "preserveValueImports": true,
+    // Enforce using `import type` instead of `import` for types
+    "importsNotUsedAsValues": "error",
+
+    "lib": ["esnext", "dom"],
+    "types": ["vite/client"],
+    "noEmit": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["**/*.ts", "src/**/*.d.ts",
+      "src/types/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "compileOnSave": false
+}

@@ -1,0 +1,98 @@
+{
+  "name": "tdesign-console",
+  "version": "0.5.4",
+  "scripts": {
+    "dev:mock": "vite --open --mode mock",
+    "dev": "vite --open --mode development",
+    "dev:linux": "vite --mode development",
+    "build:mock": "vite build --mode mock",
+    "build:test": "vite build --mode test",
+    "build": "vue-tsc --noEmit && vite build --mode release",
+    "preview": "vite preview",
+    "type-check": "vue-tsc --noEmit",
+    "lint": "eslint --ext .vue,.js,.jsx,.ts,.tsx ./ --max-warnings 0",
+    "lint:fix": "eslint --ext .vue,.js,jsx,.ts,.tsx ./ --max-warnings 0 --fix",
+    "stylelint": "stylelint src/**/*.{html,vue,sass,less}",
+    "stylelint:fix": "stylelint --fix src/**/*.{html,vue,vss,sass,less}",
+    "prepare": "husky install",
+    "site:preview": "npm run build && cp -r dist _site",
+    "test": "echo \"no test specified,work in process\"",
+    "test:coverage": "echo \"no test:coverage specified,work in process\""
+  },
+  "dependencies": {
+    "@vueuse/core": "^9.3.0",
+    "axios": "^0.27.2",
+    "crypto-js": "^4.1.1",
+    "dayjs": "^1.10.6",
+    "echarts": "^5.4.0",
+    "lodash-es": "^4.17.21",
+    "nprogress": "^0.2.0",
+    "pinia": "^2.0.11",
+    "pinia-plugin-persistedstate": "^2.1.1",
+    "qrcode.vue": "^3.2.2",
+    "qs": "^6.10.5",
+    "tdesign-icons-vue-next": "^0.1.1",
+    "tdesign-vue-next": "^0.24.2",
+    "tvision-color": "^1.3.1",
+    "vue": "^3.2.31",
+    "vue-clipboard3": "^2.0.0",
+    "vue-router": "~4.1.5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "@types/crypto-js": "^4.1.1",
+    "@types/echarts": "^4.9.10",
+    "@types/lodash-es": "^4.17.6",
+    "@types/qs": "^6.9.7",
+    "@types/ws": "^8.2.2",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "@vitejs/plugin-vue": "^3.1.2",
+    "@vitejs/plugin-vue-jsx": "^2.0.1",
+    "@vue/compiler-sfc": "^3.0.5",
+    "@vue/eslint-config-typescript": "^11.0.0",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.24.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.6.0",
+    "eslint-plugin-vue-scoped-css": "^2.2.0",
+    "husky": "^8.0.1",
+    "less": "^4.1.1",
+    "lint-staged": "^13.0.3",
+    "mockjs": "^1.1.0",
+    "postcss-html": "^1.5.0",
+    "postcss-less": "^6.0.0",
+    "prettier": "^2.4.1",
+    "stylelint": "~14.13.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-recommended": "^9.0.0",
+    "stylelint-config-recommended-vue": "^1.4.0",
+    "stylelint-less": "^1.0.6",
+    "stylelint-order": "^5.0.0",
+    "typescript": "^4.8.4",
+    "vite": "^3.1.5",
+    "vite-plugin-mock": "^2.9.6",
+    "vite-svg-loader": "^3.6.0",
+    "vue-tsc": "^0.40.13"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "eslint --max-warnings 0 --fix",
+      "prettier --write"
+    ],
+    "*.{html,vue,vss,sass,less}": [
+      "stylelint --fix"
+    ]
+  },
+  "description": "Base on tdesign-starter-cli"
+}

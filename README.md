@@ -1,4 +1,4 @@
-### 项目简介
+### 前言
 
 [![Vue3](https://img.shields.io/badge/Framework-Vue3-42b883)](https://vuejs.org/)
 [![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue)](https://www.typescriptlang.org/)
@@ -7,7 +7,9 @@
 [![node-current](https://img.shields.io/node/v/vite)](https://nodejs.org/en/about/releases/)
 [![GitHub](https://img.shields.io/github/license/dianjie/tdesign-console)](https://github.com/dianjie/tdesign-console/blob/main/LICENSE)
 
-基于[TDesign Starter](https://github.com/tencent/tdesign-vue-next-starter)将[BladeX](https://saber.bladex.vip/)的基础后台功能全部写了出来，支持动态路由。
+抱着学习 Vue3 的心态，就将原本[BladeX](https://saber.bladex.vip/) Vue2 版本的基础后台管理用 Vue3 写了出来，后续我会将大部分页面的列表、详情接口给 MOCK 出来。如果刚好你有购买 Ta 们的服务，就直接部署最新版的接口，然后配置好`src\config\proxy.ts`，`src\config\website.ts`这两个文件，用现成接口预览吧。
+
+项目基于[TDesign Starter](https://github.com/tencent/tdesign-vue-next-starter)开发。其中动态路由、菜单以及权限这块功能，是参考[Vben Admin](https://github.com/vbenjs/vue-vben-admin)实现的。如果项目对您有帮助，欢迎 Star；如果您有好的建议，欢迎留言。
 
 ### 特性
 
@@ -56,7 +58,7 @@
 
 src\config\global.ts // css前缀等
 src\config\proxy.ts // vite代理，没配置前请使用 npm run dev:mock 预览
-src\config\website.ts //项目配置
+src\config\website.ts // 项目配置
 
 ```
 

@@ -1,5 +1,51 @@
 import type { MockMethod } from 'vite-plugin-mock';
 
+const parentList = [
+  {
+    id: '1123598814738675201',
+    parentId: '0',
+    code: 'sex',
+    dictKey: '-1',
+    dictValue: '性别',
+    sort: 1,
+    remark: '',
+    isSealed: 0,
+    isDeleted: 0,
+    parentName: '顶级',
+    hasChildren: false,
+  },
+];
+const childList = [
+  {
+    id: '1123598814738675202',
+    parentId: '1123598814738675201',
+    code: 'sex',
+    dictKey: '1',
+    dictValue: '男',
+    sort: 1,
+    remark: '',
+    isSealed: 0,
+    isDeleted: 0,
+    parentName: '性别',
+    hasChildren: false,
+  },
+  {
+    id: '1123598814738675203',
+    parentId: '1123598814738675201',
+    code: 'sex',
+    dictKey: '2',
+    dictValue: '女',
+    sort: 2,
+    remark: '',
+    isSealed: 0,
+    isDeleted: 0,
+    parentName: '性别',
+    hasChildren: false,
+  },
+];
+
+const fullList = [...parentList, ...childList];
+
 export default [
   {
     url: '/api/blade-system/dict/dictionary',
@@ -180,6 +226,54 @@ export default [
         code: 200,
         success: true,
         data: dataConfig[code] || [],
+        msg: '操作成功',
+      };
+    },
+  },
+  {
+    url: '/api/blade-system/dict/parent-list',
+    method: 'get',
+    response: () => {
+      return {
+        code: 200,
+        success: true,
+        data: {
+          records: parentList,
+          total: 1,
+          size: 10,
+          current: 1,
+          orders: [],
+          optimizeCountSql: true,
+          searchCount: true,
+          countId: '',
+          maxLimit: -1,
+          pages: 1,
+        },
+        msg: '操作成功',
+      };
+    },
+  },
+  {
+    url: '/api/blade-system/dict/child-list',
+    method: 'get',
+    response: () => {
+      return {
+        code: 200,
+        success: true,
+        data: childList,
+        msg: '操作成功',
+      };
+    },
+  },
+  {
+    url: '/api/blade-system/dict/detail',
+    method: 'get',
+    response: ({ query }) => {
+      const { id } = query;
+      return {
+        code: 200,
+        success: true,
+        data: fullList.find((item) => item.id === id) || {},
         msg: '操作成功',
       };
     },

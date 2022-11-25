@@ -12,7 +12,14 @@
       :borderless="true"
       allow-input
       clearable
-      overlay-class-name="t-select__dropdown narrow-scrollbar"
+      :popup-props="{
+        overlayInnerClassName: ['narrow-scrollbar'],
+        overlayInnerStyle: {
+          maxHeight: '280px',
+          overflowY: 'auto',
+          overscrollBehavior: 'contain',
+        },
+      }"
       @popup-visible-change="onPopupVisibleChange"
       @clear="onClear"
       @input-change="onInputChange"
@@ -21,10 +28,7 @@
         <t-icon class="icon" name="search" size="20" style="margin-right: 6px" />
       </template>
       <template #panel>
-        <ul
-          v-show="filterMenuList.length && popupVisible"
-          class="my-autocomplete t-select__dropdown-inner t-select__dropdown-inner--size-m"
-        >
+        <ul v-show="filterMenuList.length && popupVisible" class="my-autocomplete">
           <li v-for="(item, index) in filterMenuList" :key="`${item.name}${index}`" @click="menuItemClick(item)">
             <div class="title">
               <t-icon v-if="beIcon(item)" class="title__icon" :name="item.icon" />

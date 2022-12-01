@@ -12,7 +12,9 @@
           <search :layout="layout" />
         </div>
       </template>
-      <menu-content v-show="layout !== 'side'" class="header-menu" :nav-data="menu" />
+      <template v-if="layout !== 'side'" #default>
+        <menu-content class="header-menu" :nav-data="menu" />
+      </template>
       <template #operations>
         <div class="operations-container">
           <!-- 搜索框 -->
@@ -46,10 +48,8 @@
               <template #icon>
                 <t-avatar :image="userAvatar" size="small" class="header-user-avatar" />
               </template>
-              <div class="header-user-account">
-                {{ userStore.account }}
-                <t-icon name="chevron-down" />
-              </div>
+              <div class="header-user-account">{{ userStore.account }}</div>
+              <template #suffix><t-icon name="chevron-down" /></template>
             </t-button>
           </t-dropdown>
           <t-tooltip placement="bottom" content="系统设置">
@@ -162,10 +162,6 @@ const userAvatar = computed(() => {
 </script>
 <style lang="less" scoped>
 .@{starter-prefix}-header {
-  &-layout {
-    height: 64px;
-  }
-
   &-menu-fixed {
     position: fixed;
     top: 0;
@@ -187,7 +183,6 @@ const userAvatar = computed(() => {
   &-logo-container {
     cursor: pointer;
     display: inline-flex;
-    height: 64px;
   }
 }
 

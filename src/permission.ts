@@ -8,6 +8,21 @@ import router from '@/router';
 
 NProgress.configure({ showSpinner: false });
 
+function getRoute(url: string) {
+  const queryIndex = url.indexOf('?');
+  const hasQuery = queryIndex !== -1;
+  const paramArr = hasQuery ? url.slice(queryIndex + 1).split('&') : [];
+  const params = {};
+  paramArr.forEach((param) => {
+    const [key, val] = param.split('=');
+    params[key] = decodeURIComponent(val);
+  });
+  return {
+    path: hasQuery ? url.slice(0, queryIndex) : url,
+    query: params,
+  };
+}
+
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
 
@@ -42,7 +57,6 @@ router.beforeEach(async (to, from, next) => {
     };
     if (to.path) {
       redirectData.query = {
-        ...redirectData.query,
         redirect: to.path,
       };
     }
@@ -80,7 +94,7 @@ router.beforeEach(async (to, from, next) => {
   } else {
     const redirectPath = (from.query.redirect || to.path) as string;
     const redirect = decodeURIComponent(redirectPath);
-    const nextData = to.path === redirect ? { ...to, replace: true } : { path: redirect };
+    const nextData = to.path === redirect ? { ...to, replace: true } : getRoute(redirect);
     next(nextData);
   }
 });

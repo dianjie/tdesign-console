@@ -31,6 +31,12 @@ const getWrapStyle = computed((): CSSProperties => {
   };
 });
 
+const computedStyle = getComputedStyle(document.documentElement);
+const size_xxxl = computedStyle.getPropertyValue('--td-comp-size-xxxl');
+const size_xxxxl = computedStyle.getPropertyValue('--td-comp-size-xxxxl');
+const paddingTB_xl = computedStyle.getPropertyValue('--td-comp-paddingTB-xl');
+const paddingTB_xxl = computedStyle.getPropertyValue('--td-comp-paddingTB-xxl');
+
 function calcHeight() {
   const iframe = unref(frameRef);
   if (!iframe) {
@@ -39,16 +45,19 @@ function calcHeight() {
   let clientHeight = 0;
   if (!props.isDialog) {
     const { showFooter, isUseTabsRouter, showBreadcrumb } = settingStore;
+    const headerHeight = parseFloat(size_xxxl);
     const navHeight = isUseTabsRouter ? 48 : 0;
-    const breadcrumbHeight = showBreadcrumb ? 44 : 0;
-    const contentPadding = 50;
-    const headerHeight = 64;
+    const breadcrumbHeight = showBreadcrumb ? 46 : 0;
+    const contentPadding = parseFloat(paddingTB_xxl) * 2;
     const footerHeight = showFooter ? 44 : 0;
-    const top = headerHeight + footerHeight + navHeight + breadcrumbHeight + contentPadding;
+    const top = headerHeight + navHeight + breadcrumbHeight + contentPadding + footerHeight + 2;
     heightRef.value = window.innerHeight - top;
     clientHeight = document.documentElement.clientHeight - top;
   } else {
-    const top = 56 + 80 + 40;
+    const diaologHeader = parseFloat(size_xxxl);
+    const diaologFooter = parseFloat(size_xxxxl);
+    const contentPadding = parseFloat(paddingTB_xl) * 2;
+    const top = diaologHeader + diaologFooter + contentPadding + 2;
     heightRef.value = window.innerHeight - top;
     clientHeight = document.documentElement.clientHeight - top;
   }

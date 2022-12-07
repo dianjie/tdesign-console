@@ -1,0 +1,1 @@
+import{_ as o,e as t,f as _,i as s,l as n}from"./index.ec7ccd34.js";const c={},a={class:"tdesign-wrapper"};function r(d,l){const e=t("router-view");return _(),s("div",a,[n(e)])}const p=o(c,[["render",r],["__scopeId","data-v-6d4bf486"],["__file","D:/Study/tdesign-console/src/layouts/blank.vue"]]);export{p as default};

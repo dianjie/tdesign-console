@@ -58,11 +58,15 @@ export const useUserStore = defineStore('user', {
     },
     async login(userInfo: Record<string, any>) {
       const data = await loginApi({ ...userInfo, password: md5(userInfo.password).toString() });
+      if (data.error_code) {
+        return Promise.reject(data);
+      }
       const { access_token, refresh_token } = data;
       // save token
       this.setToken(access_token);
       this.setRefreshToken(refresh_token);
       this.setUserInfo(data);
+      return Promise.resolve();
     },
     async getUserInfo() {
       const mockRemoteUserInfo = async (token: string) => {

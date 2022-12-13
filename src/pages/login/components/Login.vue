@@ -116,7 +116,7 @@ const userStore = useUserStore();
 const INITIAL_DATA = {
   tenantId: website.tenantId,
   username: 'admin',
-  password: '123456',
+  password: 'admin',
   type: 'account',
   phone: '',
   verifyCode: '',
@@ -173,6 +173,7 @@ const onSubmit = async ({ validateResult }) => {
       MessagePlugin.success('登陆成功');
       router.replace(BASE_HOME);
     } catch (e) {
+      e.error_description && MessagePlugin.error(e.error_description);
       submiting.value = false;
       if (website.captchaMode) {
         refreshCode();

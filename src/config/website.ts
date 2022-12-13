@@ -2,8 +2,8 @@
  * 全局配置文件
  */
 export default {
-  clientId: 'clientId', // 客户端id
-  clientSecret: 'clientSecret', // 客户端密钥
+  clientId: 'saber', // 客户端id
+  clientSecret: 'saber_secret', // 客户端密钥
   tokenHeader: 'Blade-Auth',
   tokenTime: 1800,
   tenantMode: true, // 是否开启租户模式

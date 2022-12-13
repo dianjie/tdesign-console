@@ -4,7 +4,7 @@ export default {
     // 开发环境接口请求
     apiUrl: '',
     urlPrefix: '/api',
-    proxy: [['/api', 'http://xxx.com', true]],
+    proxy: [['/api', 'https://saber.bladex.vip', false]],
     // 开发环境 cdn 路径
     cdn: '',
   },

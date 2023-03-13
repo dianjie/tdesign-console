@@ -2,18 +2,18 @@
   <router-view v-if="!isRefreshing" v-slot="{ Component }">
     <transition name="fade" mode="out-in">
       <keep-alive :include="aliveViews">
-        <component :is="Component" :key="activeRouteFullPath" />
+        <component :is="Component" />
       </keep-alive>
     </transition>
   </router-view>
-  <frame-layout />
+  <frame-page />
 </template>
 
 <script setup lang="ts">
-import { computed, type ComputedRef } from 'vue';
-import { useRouter } from 'vue-router';
+import { computed } from 'vue';
+import type { ComputedRef } from 'vue';
 import { useTabsRouterStore } from '@/store';
-import FrameLayout from '@/layouts/iframe/index.vue';
+import FramePage from '@/layouts/frame/index.vue';
 
 // <suspense>标签属于实验性功能，请谨慎使用
 // 如果存在需解决/page/1=> /page/2 刷新数据问题 请修改代码 使用activeRouteFullPath 作为key
@@ -21,10 +21,11 @@ import FrameLayout from '@/layouts/iframe/index.vue';
 //  <component :is="Component" :key="activeRouteFullPath" />
 // </suspense>
 
-const activeRouteFullPath = computed(() => {
-  const router = useRouter();
-  return router.currentRoute.value.fullPath;
-});
+// import { useRouter } from 'vue-router';
+// const activeRouteFullPath = computed(() => {
+//   const router = useRouter();
+//   return router.currentRoute.value.fullPath;
+// });
 
 const aliveViews = computed(() => {
   const tabsRouterStore = useTabsRouterStore();

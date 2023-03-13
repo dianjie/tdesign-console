@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import type { AxiosRequestConfig, InternalAxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import { stringify } from 'qs';
 import { isFunction, cloneDeep } from 'lodash-es';
 import type { CreateAxiosOptions } from './AxiosTransform';
@@ -63,7 +63,7 @@ export class VAxios {
     const axiosCanceler = new AxiosCanceler();
 
     // 请求配置处理
-    this.instance.interceptors.request.use((config: AxiosRequestConfig) => {
+    this.instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       const {
         headers: { ignoreRepeatRequest },
       } = config;
@@ -71,7 +71,7 @@ export class VAxios {
       if (!ignoreRepeat) axiosCanceler.addPending(config);
 
       if (requestInterceptors && isFunction(requestInterceptors)) {
-        config = requestInterceptors(config, this.options);
+        config = requestInterceptors(config, this.options) as InternalAxiosRequestConfig;
       }
       return config;
     }, undefined);

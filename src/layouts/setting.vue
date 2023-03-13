@@ -23,11 +23,7 @@
         </t-radio-group>
         <div class="setting-group-title">主题色</div>
         <t-radio-group v-model="formData.brandTheme">
-          <div
-            v-for="(item, index) in COLOR_OPTIONS.slice(0, COLOR_OPTIONS.length - 1)"
-            :key="index"
-            class="setting-layout-drawer"
-          >
+          <div v-for="(item, index) in DEFAULT_COLOR_OPTIONS" :key="index" class="setting-layout-drawer">
             <t-radio-button :key="index" :value="item" class="setting-layout-color-group">
               <color-container :value="item" />
             </t-radio-button>
@@ -50,11 +46,8 @@
                   :swatch-colors="[]"
                 />
               </template>
-              <t-radio-button
-                :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]"
-                class="setting-layout-color-group dynamic-color-btn"
-              >
-                <color-container :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]" />
+              <t-radio-button :value="dynamicColor" class="setting-layout-color-group dynamic-color-btn">
+                <color-container :value="dynamicColor" />
               </t-radio-button>
             </t-popup>
           </div>
@@ -100,7 +93,8 @@
 </template>
 <script setup lang="ts">
 import { ref, computed, onMounted, watchEffect } from 'vue';
-import { MessagePlugin, type PopupVisibleChangeContext } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
+import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
 import { Color } from 'tvision-color';
 import useClipboard from 'vue-clipboard3';
 
@@ -109,7 +103,8 @@ import Thumbnail from '@/components/thumbnail/index.vue';
 import ColorContainer from '@/components/color/index.vue';
 
 import STYLE_CONFIG from '@/config/style';
-import { insertThemeStylesheet, generateColorMap } from '@/config/color';
+import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
+import { insertThemeStylesheet, generateColorMap } from '@/utils/color';
 
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
@@ -118,12 +113,13 @@ import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 const settingStore = useSettingStore();
 
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
-const COLOR_OPTIONS = ['default', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'purple', 'dynamic'];
+
 const MODE_OPTIONS = [
   { type: 'light', text: '明亮' },
   { type: 'dark', text: '暗黑' },
   { type: 'auto', text: '跟随系统' },
 ];
+
 const initStyleConfig = () => {
   const styleConfig = STYLE_CONFIG;
   for (const key in styleConfig) {
@@ -135,6 +131,10 @@ const initStyleConfig = () => {
   return styleConfig;
 };
 
+const dynamicColor = computed(() => {
+  const isDynamic = DEFAULT_COLOR_OPTIONS.indexOf(formData.value.brandTheme) === -1;
+  return isDynamic ? formData.value.brandTheme : '';
+});
 const formData = ref({ ...initStyleConfig() });
 const isColoPickerDisplay = ref(false);
 
@@ -150,14 +150,17 @@ const showSettingPanel = computed({
 });
 
 const changeColor = (hex: string) => {
-  const newPalette = Color.getPaletteByGradation({
+  const { colors: newPalette, primary: brandColorIndex } = Color.getColorGradations({
     colors: [hex],
     step: 10,
+    remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
   })[0];
   const { mode } = settingStore;
-  const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark');
+
+  const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark', brandColorIndex);
 
   settingStore.addColor({ [hex]: colorMap });
+  formData.value.brandTheme = hex;
   settingStore.updateConfig({ ...formData.value, brandTheme: hex });
   insertThemeStylesheet(hex, colorMap, mode as 'light' | 'dark');
 };
@@ -208,10 +211,12 @@ const getThumbnailUrl = (name: string): string => {
 };
 
 watchEffect(() => {
-  settingStore.updateConfig(formData.value);
+  if (formData.value.brandTheme) settingStore.updateConfig(formData.value);
 });
 </script>
-<style lang="less" scoped>
+<!-- teleport导致drawer 内 scoped样式问题无法生效 先规避下 -->
+<!-- eslint-disable-next-line vue-scoped-css/enforce-style-type -->
+<style lang="less">
 .tdesign-setting {
   z-index: 100;
   position: fixed;
@@ -220,7 +225,7 @@ watchEffect(() => {
   height: 40px;
   width: 40px;
   border-radius: 20px 0 0 20px;
-  transition: transform 0.3s cubic-bezier(0.7, 0.3, 0.1, 1), visibility 0.3s cubic-bezier(0.7, 0.3, 0.1, 1);
+  transition: all 0.3s;
 
   .t-icon {
     margin-left: 8px;
@@ -294,14 +299,14 @@ watchEffect(() => {
     padding-bottom: 100px;
   }
 
-  :deep(.t-radio-group.t-size-m) {
+  .t-radio-group.t-size-m {
     min-height: 32px;
     width: 100%;
     justify-content: space-between;
     align-items: center;
   }
 
-  :deep(.t-radio-group.t-size-m .t-radio-button) {
+  .t-radio-group.t-size-m .t-radio-button {
     height: auto;
   }
 
@@ -311,34 +316,34 @@ watchEffect(() => {
     align-items: center;
     margin-bottom: 16px;
 
-    :deep(.t-radio-button) {
+    .t-radio-button {
       display: inline-flex;
       max-height: 78px;
       padding: 8px;
       border-radius: var(--td-radius-default);
-      border: 2px solid #e3e6eb;
+      border: 2px solid var(--td-component-border);
 
       > .t-radio-button__label {
         display: inline-flex;
       }
     }
 
-    :deep(.t-is-checked) {
+    .t-is-checked {
       border: 2px solid var(--td-brand-color) !important;
     }
 
-    :deep(.t-form__controls-content) {
+    .t-form__controls-content {
       justify-content: end;
     }
   }
 
-  :deep(.t-form__controls-content) {
+  .t-form__controls-content {
     justify-content: end;
   }
 }
 
 .setting-route-theme {
-  :deep(.t-form__label) {
+  .t-form__label {
     min-width: 310px !important;
     color: var(--td-text-color-secondary);
   }
@@ -346,7 +351,7 @@ watchEffect(() => {
 
 .setting-color-theme {
   .setting-layout-drawer {
-    :deep(.t-radio-button) {
+    .t-radio-button {
       height: 32px;
     }
 

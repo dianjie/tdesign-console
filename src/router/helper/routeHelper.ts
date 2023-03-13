@@ -7,7 +7,7 @@ import type { AppRouteModule, AppRouteRecordRaw } from '@/router/types';
 import website from '@/config/website';
 
 export type LayoutMapKey = 'LAYOUT';
-const IFRAME = () => import('@/pages/iframe/FrameBlank.vue');
+const IFRAME = () => import('@/layouts/components/FrameBlank.vue');
 
 const LayoutMap = new Map<string, () => Promise<typeof import('*.vue')>>();
 

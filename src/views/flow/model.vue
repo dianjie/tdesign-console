@@ -68,7 +68,7 @@
       <t-dialog v-model:visible="confirmVisible" header="确认删除当前所选数据？" @confirm="onConfirmDelete" />
 
       <t-dialog v-model:visible="flowBox" header="流程配置" mode="full-screen">
-        <frame-page :frame-src="flowUrl" is-dialog />
+        <frame-page :frame-src="flowUrl" />
       </t-dialog>
 
       <dialog-deploy v-model:visible="deployBox" :model-id="selectionId" />
@@ -79,11 +79,11 @@
 import { ref, onMounted } from 'vue';
 import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
+import FramePage from '@/layouts/frame/index.vue';
 import { useDesign } from '@/hooks/web/useDesign';
 import { useSetting } from '@/hooks/setting/useSetting';
 import { useRequset } from '@/hooks/web/useRequset';
 import { noop } from '@/utils';
-import FramePage from '@/pages/iframe/index.vue';
 import DialogDeploy from '@/viewsBusiness/flow/components/DialogDeploy.vue';
 import { getFlowDesignUrl } from '@/utils/helper/flowHelper';
 import { modelList, removeModel } from '@/api/flow/flow';

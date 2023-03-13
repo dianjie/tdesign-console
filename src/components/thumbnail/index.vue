@@ -24,6 +24,8 @@ const className = computed(() => {
 });
 </script>
 <style lang="less" scoped>
+@import url('@/style/index.less');
+
 .thumbnail {
   &-container {
     display: inline-block;

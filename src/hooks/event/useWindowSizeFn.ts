@@ -1,28 +1,26 @@
-import { useDebounceFn } from '@vueuse/core';
+import { debounce } from 'lodash-es';
 import { onUnmounted, onMounted } from 'vue';
 
 interface WindowSizeOptions {
-  once?: boolean;
   immediate?: boolean;
-  listenerOptions?: AddEventListenerOptions | boolean;
+}
+
+interface Fn<T = any, R = T> {
+  (...arg: T[]): R;
 }
 
 export function useWindowSizeFn<T>(fn: Fn<T>, options?: WindowSizeOptions, wait = 150) {
-  let handler = () => {
-    fn();
-  };
-  const handleSize = useDebounceFn(handler, wait);
-  handler = handleSize;
+  const handleSize: () => void = debounce(fn, wait);
 
   const start = () => {
     if (options && options.immediate) {
-      handler();
+      fn();
     }
-    window.addEventListener('resize', handler);
+    window.addEventListener('resize', handleSize);
   };
 
   const stop = () => {
-    window.removeEventListener('resize', handler);
+    window.removeEventListener('resize', handleSize);
   };
 
   onMounted(() => {

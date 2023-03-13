@@ -1,0 +1,1 @@
+import{a1 as e}from"./index.8ed3877a.js";const l=(a,t,r)=>e.get({url:"/blade-log/api/list",params:{...r,current:a,size:t}},{joinTime:!1}),i=a=>e.get({url:"/blade-log/api/detail",params:{id:a}});export{l as a,i as g};

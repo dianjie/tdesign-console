@@ -28,7 +28,6 @@
 import { computed } from 'vue';
 import type { PropType } from 'vue';
 import type { MenuRoute } from '@/types/interface';
-import { getActive } from '@/router';
 
 type ListItemType = MenuRoute & { icon?: string };
 
@@ -38,8 +37,6 @@ const props = defineProps({
     default: () => [],
   },
 });
-
-const active = computed(() => getActive());
 
 const list = computed(() => {
   const { navData } = props;
@@ -83,9 +80,6 @@ const getHref = (item: MenuRoute) => {
 };
 
 const getPath = (item: ListItemType) => {
-  if (active.value.startsWith(item.path)) {
-    return active.value;
-  }
   return item.meta?.single ? item.redirect : item.path;
 };
 

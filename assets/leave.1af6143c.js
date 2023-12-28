@@ -1,1 +1,0 @@
-import{a1 as s}from"./index.c2521a03.js";const a=e=>s.post({url:"/blade-desk/process/leave/start-process",data:e},{errorMessageMode:"message"}),t=e=>s.get({url:"/blade-desk/process/leave/detail",params:{businessId:e}});export{t as a,a as l};

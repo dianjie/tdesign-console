@@ -119,10 +119,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import { manifest } from 'tdesign-icons-vue-next/lib/manifest';
-import { getTreeMenu, getMenuDetail, submitMenu } from '@/api/system/menu';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, nextTick, ref, watch } from 'vue';
+
+import { getMenuDetail, getTreeMenu, submitMenu } from '@/api/system/menu';
 
 const INITIAL_DATA = {
   name: '',

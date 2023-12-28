@@ -83,9 +83,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick, inject } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { getDeptTree, getDeptDetail, submitDept } from '@/api/system/dept';
+import { computed, inject, nextTick, ref, watch } from 'vue';
+
+import { getDeptDetail, getDeptTree, submitDept } from '@/api/system/dept';
 
 const INITIAL_DATA = {
   deptName: '',

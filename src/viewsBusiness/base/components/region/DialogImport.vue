@@ -46,12 +46,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick, unref } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
-import { CloudDownloadIcon } from 'tdesign-icons-vue-next';
 import { useDebounceFn } from '@vueuse/core';
+import { CloudDownloadIcon } from 'tdesign-icons-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { nextTick, ref, unref, watch } from 'vue';
+
+import { exportTemplate, importRegion } from '@/api/base/region';
 import { downloadByData } from '@/utils/file/download';
-import { importRegion, exportTemplate } from '@/api/base/region';
 
 const INITIAL_DATA = {
   excelFile: [],

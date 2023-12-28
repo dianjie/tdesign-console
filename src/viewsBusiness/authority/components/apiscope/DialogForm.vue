@@ -59,11 +59,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick, onBeforeMount } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, nextTick, onBeforeMount, ref, watch } from 'vue';
+
+import { getDetail, submit } from '@/api/authority/apiscope';
 import { getDictData } from '@/api/system/dict';
 import { changeDictDataType } from '@/utils';
-import { getDetail, submit } from '@/api/authority/apiscope';
 
 const INITIAL_DATA = {
   scopeName: '',

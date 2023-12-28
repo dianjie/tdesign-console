@@ -9,25 +9,14 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-
-    "useDefineForClassFields": true,
-
-    "forceConsistentCasingInFileNames": true,
-    // Required in Vite
-    "isolatedModules": true,
-    // For `<script setup>`
-    // See <https://devblogs.microsoft.com/typescript/announcing-typescript-4-5-beta/#preserve-value-imports>
-    "preserveValueImports": true,
-    // Enforce using `import type` instead of `import` for types
-    "importsNotUsedAsValues": "error",
-
     "lib": ["esnext", "dom"],
     "types": ["vite/client"],
     "noEmit": true,
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "noImplicitAny": true
   },
   "include": [
     "**/*.ts",

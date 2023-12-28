@@ -79,14 +79,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useDesign } from '@/hooks/web/useDesign';
+import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
+import { onMounted, ref } from 'vue';
+
+import { getList, remove } from '@/api/system/param';
 import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
 import { useRequset } from '@/hooks/web/useRequset';
 import DialogForm from '@/viewsBusiness/system/components/param/DialogForm.vue';
-import { getList, remove } from '@/api/system/param';
 import { COLUMNS } from '@/viewsBusiness/system/constant/param/constant';
 
 const { tableVar } = useDesign();

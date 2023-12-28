@@ -95,17 +95,18 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, reactive, onMounted, unref } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import type { TreeDefaultRow } from '@/types/interface';
-import { useDesign } from '@/hooks/web/useDesign';
-import { useSetting } from '@/hooks/setting/useSetting';
-import { useRequset } from '@/hooks/web/useRequset';
-import { usePermission } from '@/hooks/web/usePermission';
-import { COLUMNS } from '@/viewsBusiness/system/constant/menu/constant';
-import DialogForm from '@/viewsBusiness/system/components/menu/DialogForm.vue';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { onMounted, reactive, ref, unref } from 'vue';
+
 import { getLazyList, removeByIds } from '@/api/system/menu';
+import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
+import { usePermission } from '@/hooks/web/usePermission';
+import { useRequset } from '@/hooks/web/useRequset';
+import type { TreeDefaultRow } from '@/types/interface';
+import DialogForm from '@/viewsBusiness/system/components/menu/DialogForm.vue';
+import { COLUMNS } from '@/viewsBusiness/system/constant/menu/constant';
 
 const { tableVar } = useDesign();
 const { getTableHeaderAffixedTop, getLayoutContainer } = useSetting();

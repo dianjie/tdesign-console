@@ -97,13 +97,14 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, ref, unref } from 'vue';
 import { useDebounceFn } from '@vueuse/core';
-import { MessagePlugin } from 'tdesign-vue-next';
 import md5 from 'crypto-js/md5';
-import { useDesign } from '@/hooks/web/useDesign';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { onBeforeMount, ref, unref } from 'vue';
+
 import { uploadOssDefult } from '@/api/resource/oss';
 import { getUserInfo, updateInfo, updatePassword } from '@/api/system/user';
+import { useDesign } from '@/hooks/web/useDesign';
 
 const { tableVar } = useDesign();
 

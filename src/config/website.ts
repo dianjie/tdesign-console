@@ -13,7 +13,7 @@ export default {
   statusWhiteList: [],
   // 配置菜单的属性
   menu: {
-    iconDefault: 'view-module',
+    iconDefault: 'view-list',
     props: {
       // meata title
       title: 'name',

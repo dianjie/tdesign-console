@@ -91,17 +91,18 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useDesign } from '@/hooks/web/useDesign';
-import { useSetting } from '@/hooks/setting/useSetting';
-import { useRequset } from '@/hooks/web/useRequset';
-import { usePermission } from '@/hooks/web/usePermission';
-import { COLUMNS } from '@/viewsBusiness/system/constant/dict/constant';
-import DialogForm from '@/viewsBusiness/system/components/dict/DialogForm.vue';
-import DialogChildList from '@/viewsBusiness/system/components/dict/child/DialogList.vue';
+import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
+import { onMounted, ref } from 'vue';
+
 import { getList, remove } from '@/api/system/dict';
+import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
+import { usePermission } from '@/hooks/web/usePermission';
+import { useRequset } from '@/hooks/web/useRequset';
+import DialogChildList from '@/viewsBusiness/system/components/dict/child/DialogList.vue';
+import DialogForm from '@/viewsBusiness/system/components/dict/DialogForm.vue';
+import { COLUMNS } from '@/viewsBusiness/system/constant/dict/constant';
 
 const { tableVar } = useDesign();
 const { getTableHeaderAffixedTop, getLayoutContainer } = useSetting();

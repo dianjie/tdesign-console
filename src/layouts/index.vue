@@ -24,21 +24,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, watch, ref } from 'vue';
-import { storeToRefs } from 'pinia';
-import { useRoute } from 'vue-router';
-import dayjs from 'dayjs';
-import { useSettingStore, useTabsRouterStore, useUserStore } from '@/store';
+import '@/style/layout.less';
 
-import SettingCom from './setting.vue';
-import LayoutHeader from './components/LayoutHeader.vue';
-import LayoutContent from './components/LayoutContent.vue';
-import LayoutSideNav from './components/LayoutSideNav.vue';
+import dayjs from 'dayjs';
+import { storeToRefs } from 'pinia';
+import { computed, onMounted, ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 
 import { prefix } from '@/config/global';
 import website from '@/config/website';
+import { useSettingStore, useTabsRouterStore, useUserStore } from '@/store';
 
-import '@/style/layout.less';
+import LayoutContent from './components/LayoutContent.vue';
+import LayoutHeader from './components/LayoutHeader.vue';
+import LayoutSideNav from './components/LayoutSideNav.vue';
+import SettingCom from './setting/page-config.vue';
 
 const route = useRoute();
 const settingStore = useSettingStore();

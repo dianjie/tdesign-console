@@ -101,15 +101,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import QrcodeVue from 'qrcode.vue';
 import { type FormInstanceFunctions, MessagePlugin } from 'tdesign-vue-next';
-import { useCounter } from '@/hooks';
-import { useUserStore } from '@/store';
-import website from '@/config/website';
-import { BASE_HOME } from '@/router/constant';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
 import { getCaptcha } from '@/api/system/user';
+import website from '@/config/website';
+import { useCounter } from '@/hooks';
+import { BASE_HOME } from '@/router/constant';
+import { useUserStore } from '@/store';
 
 const userStore = useUserStore();
 
@@ -194,7 +195,7 @@ if (website.captchaMode) {
 </script>
 
 <style lang="less" scoped>
-@import url('../index.less');
+@import '../index.less';
 
 .login-code {
   // display: flex;

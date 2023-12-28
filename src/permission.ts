@@ -1,10 +1,11 @@
-import type { RouteRecordRaw } from 'vue-router';
-import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
 
-import { getPermissionStore, getUserStore } from '@/store';
-import { LONGIN_NAME, PAGE_NOT_FOUND_NAME, LOGIN_PATH, BASE_HOME } from '@/router/constant';
+import NProgress from 'nprogress'; // progress bar
+import type { RouteRecordRaw } from 'vue-router';
+
 import router from '@/router';
+import { BASE_HOME, LOGIN_PATH, LONGIN_NAME, PAGE_NOT_FOUND_NAME } from '@/router/constant';
+import { getPermissionStore, getUserStore } from '@/store';
 
 NProgress.configure({ showSpinner: false });
 

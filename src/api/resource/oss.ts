@@ -1,8 +1,8 @@
+import type { UploadFileParams } from '@/types/axios';
+import { request } from '@/utils/request';
+
 import type { UploadApiResult } from '../system/model/uploadModel';
 import type { OssParams, UploadParams } from './model/ossModel';
-import type { UploadFileParams } from '@/types/axios';
-
-import { request } from '@/utils/request';
 
 enum Api {
   OssList = '/blade-resource/oss/list',

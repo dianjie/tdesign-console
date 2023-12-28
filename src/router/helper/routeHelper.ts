@@ -1,10 +1,10 @@
-import type { Router, RouteRecordNormalized } from 'vue-router';
-
 import { cloneDeep, omit, pick } from 'lodash-es';
+import type { Router, RouteRecordNormalized } from 'vue-router';
 import { createRouter, createWebHashHistory } from 'vue-router';
+
+import website from '@/config/website';
 import { getParentLayout, LAYOUT, NOTFOUND } from '@/router/constant';
 import type { AppRouteModule, AppRouteRecordRaw } from '@/router/types';
-import website from '@/config/website';
 
 export type LayoutMapKey = 'LAYOUT';
 const IFRAME = () => import('@/layouts/components/FrameBlank.vue');

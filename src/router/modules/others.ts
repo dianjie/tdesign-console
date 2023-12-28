@@ -1,5 +1,6 @@
-import { LAYOUT } from '../constant';
 import LogoutIcon from '@/assets/assets-slide-logout.svg';
+
+import { LAYOUT } from '../constant';
 
 export default [
   {

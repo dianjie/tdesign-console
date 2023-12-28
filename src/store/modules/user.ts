@@ -1,11 +1,12 @@
 import md5 from 'crypto-js/md5';
-import { defineStore } from 'pinia';
 import { omit } from 'lodash-es';
+import { defineStore } from 'pinia';
 import { unref } from 'vue';
-import { store, getPermissionStore } from '@/store';
+
+import { loginApi, refreshTokenApi } from '@/api/system/user';
 import router from '@/router';
 import { LOGIN_PATH } from '@/router/constant';
-import { loginApi, refreshTokenApi } from '@/api/system/user';
+import { getPermissionStore, store } from '@/store';
 import { setObjToUrlParams } from '@/utils/request/utils';
 
 export const useUserStore = defineStore('user', {

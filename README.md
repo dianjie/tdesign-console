@@ -4,7 +4,7 @@
 [![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Develop-Vite-747bff)](https://vitejs.dev)
 [![Pinia](https://img.shields.io/badge/Store-Pinia-f7d336)](https://pinia.vuejs.org)
-[![node-current](https://img.shields.io/node/v/vite)](https://nodejs.org/en/about/releases/)
+[![Static Badge]](https://img.shields.io/badge/node-16.x-brightgreen)
 [![GitHub](https://img.shields.io/github/license/dianjie/tdesign-console)](https://github.com/dianjie/tdesign-console/blob/main/LICENSE)
 
 抱着学习 Vue3 的心态，就将原本[BladeX](https://saber.bladex.vip/) Vue2 版本的基础后台管理用 Vue3 写了出来，后续我会将大部分页面的列表、详情接口给 MOCK 出来。如果刚好你有购买 Ta 们的服务，就直接部署最新版的接口，然后配置好`src\config\proxy.ts`，`src\config\website.ts`这两个文件，用现成接口预览吧。
@@ -93,10 +93,6 @@ npm run build:mock
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br> IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Edge >=84                                                                                                                                                                                                        | Firefox >=83                                                                                                                                                                                                      | Chrome >=84                                                                                                                                                                                                   | Safari >=14.1                                                                                                                                                                                                 |
-
-### 后续计划
-
-- [ ] 封装 Crud 组件，通过 JSON 配置化生成相关 Crud 逻辑
 
 ### 推荐的 IDE 设置
 

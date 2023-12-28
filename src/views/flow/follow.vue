@@ -68,14 +68,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { MessagePlugin, DialogPlugin, type PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useDesign } from '@/hooks/web/useDesign';
+import { DialogPlugin, MessagePlugin, type PageInfo } from 'tdesign-vue-next';
+import { onMounted, ref } from 'vue';
+
+import { deleteProcessInstance, followList } from '@/api/flow/flow';
 import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
 import { useRequset } from '@/hooks/web/useRequset';
 import { noop } from '@/utils';
-import { followList, deleteProcessInstance } from '@/api/flow/flow';
 import { COLUMNS } from '@/viewsBusiness/flow/constant/follow/constant';
 
 const { tableVar } = useDesign();

@@ -69,10 +69,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { getDetail, submit } from '@/api/system/tenant';
+import { computed, nextTick, ref, watch } from 'vue';
+
 import { uploadOssDefult } from '@/api/resource/oss';
+import { getDetail, submit } from '@/api/system/tenant';
 
 const INITIAL_DATA = {
   tenantName: '',

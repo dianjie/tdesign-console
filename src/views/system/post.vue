@@ -99,18 +99,19 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onBeforeMount, onMounted, provide } from 'vue';
-import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { formatIdName, formatDictValue, changeDictDataType } from '@/utils';
-import { getList, remove } from '@/api/system/post';
-import { useDesign } from '@/hooks/web/useDesign';
-import { useSetting } from '@/hooks/setting/useSetting';
-import { useRequset } from '@/hooks/web/useRequset';
-import { COLUMNS } from '@/viewsBusiness/system/constant/post/constant';
-import { getTenantSelectList } from '@/api/system/tenant';
+import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
+import { onBeforeMount, onMounted, provide, ref } from 'vue';
+
 import { getDictData } from '@/api/system/dict';
+import { getList, remove } from '@/api/system/post';
+import { getTenantSelectList } from '@/api/system/tenant';
+import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
+import { useRequset } from '@/hooks/web/useRequset';
+import { changeDictDataType, formatDictValue, formatIdName } from '@/utils';
 import DialogForm from '@/viewsBusiness/system/components/post/DialogForm.vue';
+import { COLUMNS } from '@/viewsBusiness/system/constant/post/constant';
 
 const { tableVar } = useDesign();
 const { getTableHeaderAffixedTop, getLayoutContainer } = useSetting();

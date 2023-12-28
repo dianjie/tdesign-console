@@ -1,7 +1,9 @@
-import { useRoute, createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router';
 import { uniq } from 'lodash-es';
-import { LONGIN_NAME, BASE_HOME } from './constant';
+import { createRouter, createWebHashHistory, type RouteRecordRaw, useRoute } from 'vue-router';
+
 import type { AppRouteRecordRaw } from '@/router/types';
+
+import { BASE_HOME, LONGIN_NAME } from './constant';
 
 interface ModuleType {
   default: [];
@@ -46,7 +48,7 @@ const defaultRouterList: AppRouteRecordRaw[] = [
 export const allRoutes: AppRouteRecordRaw[] = [...defaultRouterList, ...asyncRouterList];
 
 export const getRoutesExpanded = () => {
-  const expandedRoutes = [];
+  const expandedRoutes: Array<string> = [];
 
   allRoutes.forEach((item) => {
     if (item.meta && item.meta.expanded) {

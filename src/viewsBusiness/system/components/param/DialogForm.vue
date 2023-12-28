@@ -40,8 +40,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, nextTick, ref, watch } from 'vue';
+
 import { getDetail, submit } from '@/api/system/param';
 
 const INITIAL_DATA = {

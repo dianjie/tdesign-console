@@ -31,9 +31,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick, onBeforeMount } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { datasource, getDetail, datasourceSelect } from '@/api/system/tenant';
+import { nextTick, onBeforeMount, ref, watch } from 'vue';
+
+import { datasource, datasourceSelect, getDetail } from '@/api/system/tenant';
 
 const INITIAL_DATA = {
   datasourceId: '',

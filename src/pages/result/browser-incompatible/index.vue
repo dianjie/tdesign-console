@@ -47,7 +47,7 @@ import Thumbnail from '@/components/thumbnail/index.vue';
   padding: var(--td-comp-paddingTB-xl) var(--td-comp-paddingLR-xxl);
   width: 640px;
   background: var(--td-bg-color-container);
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
   border-radius: var(--td-radius-medium);
 }
 

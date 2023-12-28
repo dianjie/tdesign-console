@@ -1,7 +1,8 @@
-import { request } from '@/utils/request';
-import type { LoginParams, LoginResultModel, RefreshTokenParams } from './model/userModel';
-import type { UploadFileParams } from '@/types/axios';
 import website from '@/config/website';
+import type { UploadFileParams } from '@/types/axios';
+import { request } from '@/utils/request';
+
+import type { LoginParams, LoginResultModel, RefreshTokenParams } from './model/userModel';
 
 export const Api = {
   Login: '/blade-auth/oauth/token',

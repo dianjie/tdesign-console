@@ -132,20 +132,21 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useDesign } from '@/hooks/web/useDesign';
-import { useSetting } from '@/hooks/setting/useSetting';
-import { useRequset } from '@/hooks/web/useRequset';
-import { usePermission } from '@/hooks/web/usePermission';
-import DialogForm from '@/viewsBusiness/system/components/tenant/DialogForm.vue';
+import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
+import { onMounted, ref } from 'vue';
+
 import { getList, remove } from '@/api/system/tenant';
-import { COLUMNS } from '@/viewsBusiness/system/constant/tenant/constant';
-import DialogSetting from '@/viewsBusiness/system/components/tenant/DialogSetting.vue';
+import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
+import { usePermission } from '@/hooks/web/usePermission';
+import { useRequset } from '@/hooks/web/useRequset';
 import DialogDatasource from '@/viewsBusiness/system/components/tenant/DialogDatasource.vue';
+import DialogForm from '@/viewsBusiness/system/components/tenant/DialogForm.vue';
 import DialogPackage from '@/viewsBusiness/system/components/tenant/DialogPackage.vue';
+import DialogSetting from '@/viewsBusiness/system/components/tenant/DialogSetting.vue';
 import DialogPackageManage from '@/viewsBusiness/system/components/tenant/tenantPackage/DialogList.vue';
+import { COLUMNS } from '@/viewsBusiness/system/constant/tenant/constant';
 
 const { tableVar } = useDesign();
 const { getTableHeaderAffixedTop, getLayoutContainer } = useSetting();

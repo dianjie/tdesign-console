@@ -103,17 +103,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useDesign } from '@/hooks/web/useDesign';
-import { useTabsRouterStore } from '@/store';
-import { completeTask } from '@/api/work/work';
+
+import { getDiagramViewUrl } from '@/api/flow/flow';
 import { leaveDetail } from '@/api/process/leave';
 import { historyFlowList } from '@/api/process/process';
-import { loadImage, removeImageBlanks, emptyImage } from '@/utils';
-import { getDiagramViewUrl } from '@/api/flow/flow';
+import { completeTask } from '@/api/work/work';
+import { useDesign } from '@/hooks/web/useDesign';
+import { useTabsRouterStore } from '@/store';
+import { emptyImage, loadImage, removeImageBlanks } from '@/utils';
 
 const { tableVar } = useDesign();
 

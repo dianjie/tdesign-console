@@ -1,5 +1,5 @@
-import { request } from '@/utils/request';
 import type { UploadFileParams } from '@/types/axios';
+import { request } from '@/utils/request';
 
 enum Api {
   GetList = '/blade-system/region/list',

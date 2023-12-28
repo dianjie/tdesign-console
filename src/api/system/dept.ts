@@ -1,4 +1,5 @@
 import { request } from '@/utils/request';
+
 import type { LazyListParams } from './model/deptModel';
 
 enum Api {

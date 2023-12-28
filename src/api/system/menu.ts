@@ -1,5 +1,6 @@
 import { request } from '@/utils/request';
-import type { getMenuListResultModel, GetButtonsModel, LazyListParams } from './model/menuModel';
+
+import type { GetButtonsModel, getMenuListResultModel, LazyListParams } from './model/menuModel';
 
 export enum Api {
   GetMenuList = '/blade-system/menu/routes',

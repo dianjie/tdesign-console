@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
-import { store } from '@/store';
+
 import { getDictData } from '@/api/system/dict';
+import { store } from '@/store';
 import { changeDictDataType } from '@/utils';
 
 export const useDictStore = defineStore('dict', {

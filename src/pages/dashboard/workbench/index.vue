@@ -118,8 +118,9 @@
 
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core';
-import { DialogPlugin } from 'tdesign-vue-next';
 import { JumpIcon } from 'tdesign-icons-vue-next';
+import { DialogPlugin } from 'tdesign-vue-next';
+
 import { useUserStore } from '@/store';
 
 const userStore = useUserStore();

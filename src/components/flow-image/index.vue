@@ -18,8 +18,9 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { loadImage, removeImageBlanks, emptyImage } from '@/utils';
+
 import { getDiagramViewUrl, getResourceViewUrl } from '@/api/flow/flow';
+import { emptyImage, loadImage, removeImageBlanks } from '@/utils';
 
 const props = defineProps({
   visible: {

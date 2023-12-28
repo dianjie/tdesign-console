@@ -77,10 +77,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick, unref, inject } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { getDetail, submit, getRoleTree } from '@/api/system/role';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, inject, nextTick, ref, unref, watch } from 'vue';
+
+import { getDetail, getRoleTree, submit } from '@/api/system/role';
 
 const INITIAL_DATA = {
   roleName: '',

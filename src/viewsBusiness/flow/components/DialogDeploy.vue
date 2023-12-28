@@ -54,12 +54,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, unref, watch } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useDictStore } from '@/store';
-import { getTenantSelectList } from '@/api/system/tenant';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { ref, unref, watch } from 'vue';
+
 import { deployModel } from '@/api/flow/flow';
+import { getTenantSelectList } from '@/api/system/tenant';
+import { useDictStore } from '@/store';
 import { getFinalFlowCategory } from '@/utils/helper/flowHelper';
 
 const isGetOption = ref(false);

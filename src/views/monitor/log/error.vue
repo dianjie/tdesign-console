@@ -56,15 +56,16 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import type { PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useDesign } from '@/hooks/web/useDesign';
+import type { PageInfo } from 'tdesign-vue-next';
+import { onMounted, ref } from 'vue';
+
+import { getList } from '@/api/log/error';
 import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
 import { useRequset } from '@/hooks/web/useRequset';
 import { noop } from '@/utils';
 import DialogForm from '@/viewsBusiness/monitor/log/components/error/DialogForm.vue';
-import { getList } from '@/api/log/error';
 import { COLUMNS } from '@/viewsBusiness/monitor/log/constant/error/constant';
 
 const { tableVar } = useDesign();

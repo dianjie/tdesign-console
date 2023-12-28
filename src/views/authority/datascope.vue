@@ -69,15 +69,16 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue';
 import { useDebounceFn } from '@vueuse/core';
-import { useDesign } from '@/hooks/web/useDesign';
+import { onMounted, reactive, ref } from 'vue';
+
+import { getLazyMenuList } from '@/api/system/menu';
 import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
 import { useRequset } from '@/hooks/web/useRequset';
 import { noop } from '@/utils';
-import { COLUMNS } from '@/viewsBusiness/authority/constant/datascope/constant';
-import { getLazyMenuList } from '@/api/system/menu';
 import DialogAuthority from '@/viewsBusiness/authority/components/datascope/DialogAuthority.vue';
+import { COLUMNS } from '@/viewsBusiness/authority/constant/datascope/constant';
 
 const { tableVar } = useDesign();
 const { getTableHeaderAffixedTop, getLayoutContainer } = useSetting();

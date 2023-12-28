@@ -64,18 +64,19 @@
 </template>
 
 <script setup lang="ts">
-import { type PropType, computed } from 'vue';
+import { computed, type PropType } from 'vue';
 import { useRouter } from 'vue-router';
+
+import LogoFull from '@/assets/assets-logo-full.svg?component';
+import { prefix } from '@/config/global';
+import { getActive } from '@/router';
 import { BASE_HOME, USER_HOME } from '@/router/constant';
 import { useSettingStore, useUserStore } from '@/store';
-import { getActive } from '@/router';
-import { prefix } from '@/config/global';
-import LogoFull from '@/assets/assets-logo-full.svg?component';
 import type { MenuRoute } from '@/types/interface';
 
+import MenuContent from './MenuContent.vue';
 import Notice from './Notice.vue';
 import Search from './SelectSearch.vue';
-import MenuContent from './MenuContent.vue';
 
 const props = defineProps({
   theme: {
@@ -263,7 +264,7 @@ const userAvatar = computed(() => {
   }
 
   .header-user-account {
-    color: rgba(255, 255, 255, 0.55);
+    color: rgb(255 255 255 / 55%);
   }
 }
 
@@ -284,7 +285,7 @@ const userAvatar = computed(() => {
 
   :deep(.t-dropdown__item) {
     width: 100%;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   &:last-child {

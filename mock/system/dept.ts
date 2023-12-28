@@ -144,7 +144,7 @@ const deptList = [
   },
 ];
 
-const flatData = (data: any[], parentId = undefined) => {
+const flatData = (data: any[], parentId?: string) => {
   return data.reduce((prev, curr) => {
     if (parentId !== undefined) {
       Object.assign(curr, {
@@ -194,7 +194,7 @@ export default [
       return {
         code: 200,
         success: true,
-        data: flated.find((item) => item.id === id) || {},
+        data: flated.find((item: { id: any }) => item.id === id) || {},
         msg: '操作成功',
       };
     },

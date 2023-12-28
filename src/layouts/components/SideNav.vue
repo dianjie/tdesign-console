@@ -16,19 +16,19 @@
 </template>
 
 <script setup lang="ts">
+import { union } from 'lodash-es';
 import { computed, onMounted, type PropType } from 'vue';
 import { useRouter } from 'vue-router';
-import { union } from 'lodash-es';
 
-import { useSettingStore } from '@/store';
+import AssetLogoFull from '@/assets/assets-logo-full.svg?component';
+import AssetLogo from '@/assets/assets-t-logo.svg?component';
 import { prefix } from '@/config/global';
-import pgk from '../../../package.json';
-import type { MenuRoute } from '@/types/interface';
 import { getActive, getRoutesExpanded } from '@/router';
 import { BASE_HOME } from '@/router/constant';
+import { useSettingStore } from '@/store';
+import type { MenuRoute } from '@/types/interface';
 
-import AssetLogo from '@/assets/assets-t-logo.svg?component';
-import AssetLogoFull from '@/assets/assets-logo-full.svg?component';
+import pgk from '../../../package.json';
 import MenuContent from './MenuContent.vue';
 
 const MIN_POINT = 992 - 1;

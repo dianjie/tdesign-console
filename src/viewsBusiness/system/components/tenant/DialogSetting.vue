@@ -39,8 +39,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
+import { nextTick, ref, watch } from 'vue';
+
 import { getDetail, setting } from '@/api/system/tenant';
 
 const INITIAL_DATA = {

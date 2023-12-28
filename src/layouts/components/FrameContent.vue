@@ -6,8 +6,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { type CSSProperties, watch, ref, unref, computed } from 'vue';
 import { debounce } from 'lodash-es';
+import { computed, type CSSProperties, ref, unref, watch } from 'vue';
+
 import { useWindowSizeFn } from '@/hooks/event/useWindowSizeFn';
 import { useDesign } from '@/hooks/web/useDesign';
 import { useSettingStore } from '@/store';

@@ -55,7 +55,7 @@ const navToHelper = () => {
     align-items: center;
 
     .t-button {
-      margin-left: var(--td-comp-margin-xs);
+      margin-left: var(--td-comp-margin-l);
     }
   }
 }

@@ -47,8 +47,9 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
+
 import { useNotificationStore } from '@/store';
 import type { NotificationItem } from '@/types/interface';
 
@@ -86,7 +87,7 @@ const goDetail = () => {
   .empty-list {
     height: calc(100% - 120px);
     text-align: center;
-    padding-top: 135px;
+    padding: var(--td-comp-paddingTB-xxl) 0;
     font: var(--td-font-body-medium);
     color: var(--td-text-color-secondary);
 
@@ -95,7 +96,7 @@ const goDetail = () => {
     }
 
     p {
-      margin-top: var(--td-comp-margin-xxl);
+      margin-top: var(--td-comp-margin-xs);
     }
   }
 

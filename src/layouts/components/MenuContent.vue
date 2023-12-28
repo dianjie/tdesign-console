@@ -25,8 +25,9 @@
   </div>
 </template>
 <script setup lang="tsx">
-import { computed } from 'vue';
 import type { PropType } from 'vue';
+import { computed } from 'vue';
+
 import type { MenuRoute } from '@/types/interface';
 
 type ListItemType = MenuRoute & { icon?: string };

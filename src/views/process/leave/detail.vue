@@ -91,16 +91,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
 import { useDebounceFn } from '@vueuse/core';
+import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useDesign } from '@/hooks/web/useDesign';
-import { useSetting } from '@/hooks/setting/useSetting';
-import { useTabsRouterStore } from '@/store';
+
+import { getDiagramViewUrl } from '@/api/flow/flow';
 import { leaveDetail } from '@/api/process/leave';
 import { historyFlowList } from '@/api/process/process';
-import { loadImage, removeImageBlanks, emptyImage } from '@/utils';
-import { getDiagramViewUrl } from '@/api/flow/flow';
+import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
+import { useTabsRouterStore } from '@/store';
+import { emptyImage, loadImage, removeImageBlanks } from '@/utils';
 
 const { tableVar } = useDesign();
 const { getTableHeaderAffixedTop, getLayoutContainer } = useSetting();

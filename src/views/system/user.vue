@@ -137,23 +137,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount, provide } from 'vue';
-import { SearchIcon } from 'tdesign-icons-vue-next';
-import { MessagePlugin, DialogPlugin, type PageInfo, type SelectOptions } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useDesign } from '@/hooks/web/useDesign';
-import { useRequset } from '@/hooks/web/useRequset';
-import { usePermission } from '@/hooks/web/usePermission';
-import { useSetting } from '@/hooks/setting/useSetting';
+import { SearchIcon } from 'tdesign-icons-vue-next';
+import { DialogPlugin, MessagePlugin, type PageInfo, type SelectOptions } from 'tdesign-vue-next';
+import { onBeforeMount, provide, ref } from 'vue';
+
 import { getLazyList } from '@/api/system/dept';
-import { changeDictDataType } from '@/utils';
 import { getDictData } from '@/api/system/dict';
+import { exportUser, getList, remove, resetPassword, unlock } from '@/api/system/user';
+import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
+import { usePermission } from '@/hooks/web/usePermission';
+import { useRequset } from '@/hooks/web/useRequset';
+import { changeDictDataType } from '@/utils';
 import { downloadByData } from '@/utils/file/download';
-import { getList, remove, resetPassword, unlock, exportUser } from '@/api/system/user';
 import DialogForm from '@/viewsBusiness/system/components/user/DialogForm.vue';
+import DialogImport from '@/viewsBusiness/system/components/user/DialogImport.vue';
 import DialogRole from '@/viewsBusiness/system/components/user/DialogRole.vue';
 import DialogPlatform from '@/viewsBusiness/system/components/user/platfrom/DialogList.vue';
-import DialogImport from '@/viewsBusiness/system/components/user/DialogImport.vue';
 import { COLUMNS } from '@/viewsBusiness/system/constant/user/constant';
 
 const { tableVar } = useDesign();

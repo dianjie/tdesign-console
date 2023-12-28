@@ -59,15 +59,16 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, ref } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useRoute, useRouter } from 'vue-router';
 import dayjs from 'dayjs';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { onBeforeMount, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+import { leaveProcess } from '@/api/process/leave';
+import { getUserList } from '@/api/system/user';
 import { useDesign } from '@/hooks/web/useDesign';
 import { useTabsRouterStore } from '@/store';
-import { getUserList } from '@/api/system/user';
-import { leaveProcess } from '@/api/process/leave';
 
 const { tableVar } = useDesign();
 

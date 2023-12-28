@@ -91,15 +91,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, reactive, unref } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import type { TreeDefaultRow } from '@/types/interface';
-import { useRequset } from '@/hooks/web/useRequset';
-import { usePermission } from '@/hooks/web/usePermission';
-import { COLUMNS } from '@/viewsBusiness/system/constant/dict/child/constant';
-import DialogForm from './DialogForm.vue';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, reactive, ref, unref, watch } from 'vue';
+
 import { getChildList, remove } from '@/api/system/dict';
+import { usePermission } from '@/hooks/web/usePermission';
+import { useRequset } from '@/hooks/web/useRequset';
+import type { TreeDefaultRow } from '@/types/interface';
+import { COLUMNS } from '@/viewsBusiness/system/constant/dict/child/constant';
+
+import DialogForm from './DialogForm.vue';
 
 const { hasRole } = usePermission();
 

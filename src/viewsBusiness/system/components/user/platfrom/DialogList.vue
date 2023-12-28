@@ -69,13 +69,15 @@
   </t-dialog>
 </template>
 <script setup lang="ts">
-import { ref, inject, watch } from 'vue';
-import type { PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
+import type { PageInfo } from 'tdesign-vue-next';
+import { inject, ref, watch } from 'vue';
+
+import { getList } from '@/api/system/user';
 import { useRequset } from '@/hooks/web/useRequset';
 import { noop } from '@/utils';
-import { getList } from '@/api/system/user';
 import { COLUMNS } from '@/viewsBusiness/system/constant/user/platform';
+
 import DialogForm from './DialogForm.vue';
 
 const props = defineProps({

@@ -1,4 +1,4 @@
-import { LAYOUT, REDIRECT_NAME, PAGE_NOT_FOUND_NAME } from '../constant';
+import { LAYOUT, PAGE_NOT_FOUND_NAME, REDIRECT_NAME } from '../constant';
 
 export default [
   {

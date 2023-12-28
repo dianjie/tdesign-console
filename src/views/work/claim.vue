@@ -70,19 +70,20 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { DialogPlugin, MessagePlugin, type PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
+import { DialogPlugin, MessagePlugin, type PageInfo } from 'tdesign-vue-next';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useDesign } from '@/hooks/web/useDesign';
+
+import { claimList, claimTask } from '@/api/work/work';
+import FlowImage from '@/components/flow-image/index.vue';
 import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
 import { useRequset } from '@/hooks/web/useRequset';
 import { useDictStore } from '@/store';
 import { noop } from '@/utils';
 import { flowRoute, getFinalFlowCategory } from '@/utils/helper/flowHelper';
-import { claimList, claimTask } from '@/api/work/work';
 import { COLUMNS } from '@/viewsBusiness/work/constant/claim/constant';
-import FlowImage from '@/components/flow-image/index.vue';
 
 const { tableVar } = useDesign();
 const { getTableHeaderAffixedTop, getLayoutContainer } = useSetting();

@@ -16,6 +16,7 @@
         :key="`${routeItem.path}_${index}`"
         :value="routeItem.path"
         :removable="!routeItem.isHome"
+        :draggable="!routeItem.isHome"
       >
         <template #label>
           <t-dropdown
@@ -23,7 +24,8 @@
             :min-column-width="128"
             :popup-props="{
               overlayClassName: 'route-tabs-dropdown',
-              onVisibleChange: (visible, ctx) => handleTabMenuClick(visible, ctx, routeItem.path),
+              onVisibleChange: (visible: boolean, ctx: PopupVisibleChangeContext) =>
+                handleTabMenuClick(visible, ctx, routeItem.path),
               visible: activeTabPath === routeItem.path,
             }"
           >
@@ -69,14 +71,16 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref, computed } from 'vue';
+import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
+import { computed, nextTick, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useSettingStore, useTabsRouterStore } from '@/store';
-import { prefix } from '@/config/global';
-import type { TRouterInfo } from '@/types/interface';
 
-import LContent from './Content.vue';
+import { prefix } from '@/config/global';
+import { useSettingStore, useTabsRouterStore } from '@/store';
+import type { TRouterInfo, TTabRemoveOptions } from '@/types/interface';
+
 import LBreadcrumb from './Breadcrumb.vue';
+import LContent from './Content.vue';
 import LFooter from './Footer.vue';
 
 const route = useRoute();
@@ -93,12 +97,12 @@ const handleChangeCurrentTab = (path: string) => {
   router.push({ path, query: route.query });
 };
 
-const handleRemove = ({ value: path, index }) => {
+const handleRemove = (options: TTabRemoveOptions) => {
   const { tabRouters } = tabsRouterStore;
-  const nextRouter = tabRouters[index + 1] || tabRouters[index - 1];
+  const nextRouter = tabRouters[options.index + 1] || tabRouters[options.index - 1];
 
-  tabsRouterStore.subtractCurrentTabRouter({ path, routeIdx: index });
-  if (path === route.path) router.push({ path: nextRouter.path, query: nextRouter.query });
+  tabsRouterStore.subtractCurrentTabRouter({ path: options.value as string, routeIdx: options.index });
+  if ((options.value as string) === route.path) router.push({ path: nextRouter.path, query: nextRouter.query });
 };
 
 const handleRefresh = (route: TRouterInfo, routeIdx: number) => {
@@ -145,7 +149,7 @@ const handleOperationEffect = (type: 'other' | 'ahead' | 'behind', routeIndex: n
 
   activeTabPath.value = null;
 };
-const handleTabMenuClick = (visible: boolean, ctx, path: string) => {
+const handleTabMenuClick = (visible: boolean, ctx: PopupVisibleChangeContext, path: string) => {
   if (ctx.trigger === 'document') activeTabPath.value = null;
   if (visible) activeTabPath.value = path;
 };

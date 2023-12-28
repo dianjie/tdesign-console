@@ -92,23 +92,21 @@
   </t-drawer>
 </template>
 <script setup lang="ts">
-import { ref, computed, onMounted, watchEffect } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
+import { MessagePlugin } from 'tdesign-vue-next';
 import { Color } from 'tvision-color';
+import { computed, onMounted, ref, watchEffect } from 'vue';
 import useClipboard from 'vue-clipboard3';
 
-import { useSettingStore } from '@/store';
-import Thumbnail from '@/components/thumbnail/index.vue';
-import ColorContainer from '@/components/color/index.vue';
-
-import STYLE_CONFIG from '@/config/style';
-import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
-import { insertThemeStylesheet, generateColorMap } from '@/utils/color';
-
+import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
-import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
+import ColorContainer from '@/components/color/index.vue';
+import Thumbnail from '@/components/thumbnail/index.vue';
+import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
+import STYLE_CONFIG from '@/config/style';
+import { useSettingStore } from '@/store';
+import { generateColorMap, insertThemeStylesheet } from '@/utils/color';
 
 const settingStore = useSettingStore();
 
@@ -267,9 +265,10 @@ watchEffect(() => {
 .setting-group-title {
   font-size: 14px;
   line-height: 22px;
-  margin: 32px 0 24px 0;
+  margin: 32px 0 24px;
   text-align: left;
-  font-family: PingFang SC;
+  /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+  font-family: 'PingFang SC';
   font-style: normal;
   font-weight: 500;
   color: var(--td-text-color-primary);

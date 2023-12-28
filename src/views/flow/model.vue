@@ -76,17 +76,18 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import FramePage from '@/layouts/frame/index.vue';
-import { useDesign } from '@/hooks/web/useDesign';
-import { useSetting } from '@/hooks/setting/useSetting';
-import { useRequset } from '@/hooks/web/useRequset';
-import { noop } from '@/utils';
-import DialogDeploy from '@/viewsBusiness/flow/components/DialogDeploy.vue';
-import { getFlowDesignUrl } from '@/utils/helper/flowHelper';
+import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
+import { onMounted, ref } from 'vue';
+
 import { modelList, removeModel } from '@/api/flow/flow';
+import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
+import { useRequset } from '@/hooks/web/useRequset';
+import FramePage from '@/layouts/frame/index.vue';
+import { noop } from '@/utils';
+import { getFlowDesignUrl } from '@/utils/helper/flowHelper';
+import DialogDeploy from '@/viewsBusiness/flow/components/DialogDeploy.vue';
 import { COLUMNS } from '@/viewsBusiness/flow/constant/model/constant';
 
 const { tableVar } = useDesign();

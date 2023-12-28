@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia';
-import type { AppRouteRecordRaw, Menu } from '@/router/types';
-import { store, getDictStore } from '@/store';
-import { getMenuList, getButtons } from '@/api/system/menu';
-import { transformObjToRoute, flatMultiLevelRoutes } from '@/router/helper/routeHelper';
-import { transformRouteToMenu } from '@/router/helper/menuHelper';
-import { filter } from '@/utils/helper/treeHelper';
+
+import { getButtons, getMenuList } from '@/api/system/menu';
 import { BASE_HOME } from '@/router/constant';
+import { transformRouteToMenu } from '@/router/helper/menuHelper';
+import { flatMultiLevelRoutes, transformObjToRoute } from '@/router/helper/routeHelper';
 import { allRoutes } from '@/router/index';
+import type { AppRouteRecordRaw, Menu } from '@/router/types';
+import { getDictStore, store } from '@/store';
+import { filter } from '@/utils/helper/treeHelper';
 
 export const usePermissionStore = defineStore('permission', {
   state: () => ({

@@ -117,18 +117,19 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { MessagePlugin, DialogPlugin, type PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useDesign } from '@/hooks/web/useDesign';
+import { DialogPlugin, MessagePlugin, type PageInfo } from 'tdesign-vue-next';
+import { onMounted, ref } from 'vue';
+
+import { changeState, deleteDeployment, managerList } from '@/api/flow/flow';
+import FlowImage from '@/components/flow-image/index.vue';
 import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
 import { useRequset } from '@/hooks/web/useRequset';
 import { useDictStore } from '@/store';
 import { noop } from '@/utils';
 import { getFinalFlowCategory } from '@/utils/helper/flowHelper';
-import { managerList, deleteDeployment, changeState } from '@/api/flow/flow';
 import { COLUMNS } from '@/viewsBusiness/flow/constant/manager/constant';
-import FlowImage from '@/components/flow-image/index.vue';
 
 const { tableVar } = useDesign();
 const { getTableHeaderAffixedTop, getLayoutContainer } = useSetting();

@@ -79,12 +79,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick, onBeforeMount, unref } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, nextTick, onBeforeMount, ref, unref, watch } from 'vue';
+
+import { getDetail, submit } from '@/api/authority/datascope';
 import { getDictData } from '@/api/system/dict';
 import { changeDictDataType, formatDictValue } from '@/utils';
 import { SCOPE_COLUMN } from '@/viewsBusiness/authority/constant/datascope/authority';
-import { getDetail, submit } from '@/api/authority/datascope';
 
 const INITIAL_DATA = {
   scopeName: '',

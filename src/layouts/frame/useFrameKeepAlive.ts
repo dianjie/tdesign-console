@@ -1,8 +1,9 @@
-import { computed, toRaw, unref } from 'vue';
 import { uniqBy } from 'lodash-es';
+import { computed, toRaw, unref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useSettingStore, useTabsRouterStore } from '@/store';
+
 import type { AppRouteRecordRaw } from '@/router/types';
+import { useSettingStore, useTabsRouterStore } from '@/store';
 
 export function useFrameKeepAlive() {
   const router = useRouter();

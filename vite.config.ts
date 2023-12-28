@@ -1,13 +1,13 @@
-import { type ConfigEnv, type UserConfig, loadEnv } from 'vite';
-import { viteMockServe } from 'vite-plugin-mock';
 import createVuePlugin from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import path from 'path';
+import { type ConfigEnv, loadEnv, type UserConfig } from 'vite';
+import { viteMockServe } from 'vite-plugin-mock';
 import svgLoader from 'vite-svg-loader';
 
-import path from 'path';
-import proxyConfig from './src/config/proxy';
 import { createProxy } from './build/vite/proxy';
 import { prefix } from './src/config/global';
+import proxyConfig from './src/config/proxy';
 
 const CWD = process.cwd();
 

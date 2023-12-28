@@ -1,17 +1,35 @@
+import type {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosRequestHeaders,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from 'axios';
 import axios from 'axios';
-import type { AxiosRequestConfig, InternalAxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import { cloneDeep, debounce, isFunction, throttle } from 'lodash-es';
 import { stringify } from 'qs';
-import { isFunction, cloneDeep } from 'lodash-es';
-import type { CreateAxiosOptions } from './AxiosTransform';
-import { AxiosCanceler } from './AxiosCancel';
+
+import { ContentTypeEnum } from '@/constants';
 import type { AxiosRequestConfigRetry, RequestOptions, Result, UploadFileParams } from '@/types/axios';
 
-// Axios模块
+import { AxiosCanceler } from './AxiosCancel';
+import type { CreateAxiosOptions } from './AxiosTransform';
+
+/**
+ * Axios 模块
+ */
 export class VAxios {
-  // axios句柄
+  /**
+   * Axios实例句柄
+   * @private
+   */
   private instance: AxiosInstance;
 
-  // axios选项
+  /**
+   * Axios配置
+   * @private
+   */
   private readonly options: CreateAxiosOptions;
 
   constructor(options: CreateAxiosOptions) {
@@ -20,44 +38,56 @@ export class VAxios {
     this.setupInterceptors();
   }
 
-  // 创建axios句柄
+  /**
+   * 创建Axios实例
+   * @param config
+   * @private
+   */
   private createAxios(config: CreateAxiosOptions): void {
     this.instance = axios.create(config);
   }
 
-  // 获取数据处理
+  /**
+   * 获取数据处理类
+   * @private
+   */
   private getTransform() {
     const { transform } = this.options;
     return transform;
   }
 
-  // 获取句柄
+  /**
+   * 获取Axios实例
+   */
   getAxios(): AxiosInstance {
     return this.instance;
   }
 
-  // 配置 axios
+  /**
+   * 配置Axios
+   * @param config
+   */
   configAxios(config: CreateAxiosOptions) {
-    if (!this.instance) {
-      return;
-    }
+    if (!this.instance) return;
     this.createAxios(config);
   }
 
-  // 设置通用头信息
+  /**
+   * 设置公共头部信息
+   * @param headers
+   */
   setHeader(headers: Record<string, string>): void {
-    if (!this.instance) {
-      return;
-    }
+    if (!this.instance) return;
     Object.assign(this.instance.defaults.headers, headers);
   }
 
-  // 设置拦截器
+  /**
+   * 设置拦截器
+   * @private
+   */
   private setupInterceptors() {
     const transform = this.getTransform();
-    if (!transform) {
-      return;
-    }
+    if (!transform) return;
     const { requestInterceptors, requestInterceptorsCatch, responseInterceptors, responseInterceptorsCatch } =
       transform;
     const axiosCanceler = new AxiosCanceler();
@@ -92,12 +122,73 @@ export class VAxios {
 
     // 响应错误处理
     if (responseInterceptorsCatch && isFunction(responseInterceptorsCatch)) {
-      this.instance.interceptors.response.use(undefined, responseInterceptorsCatch);
+      this.instance.interceptors.response.use(undefined, (error) => responseInterceptorsCatch(error, this.instance));
     }
   }
 
   /**
-   * @description:  File Upload
+   * 支持 FormData 请求格式
+   * @param config
+   */
+  supportFormData(config: AxiosRequestConfig) {
+    const headers = config.headers || (this.options.headers as AxiosRequestHeaders);
+    const contentType = headers?.['Content-Type'] || headers?.['content-type'];
+
+    if (
+      contentType !== ContentTypeEnum.FormURLEncoded ||
+      !Reflect.has(config, 'data') ||
+      config.method?.toUpperCase() === 'GET'
+    ) {
+      return config;
+    }
+
+    return {
+      ...config,
+      data: stringify(config.data, { arrayFormat: 'brackets' }),
+    };
+  }
+
+  /**
+   * 支持 params 序列化
+   * @param config
+   */
+  supportParamsStringify(config: AxiosRequestConfig) {
+    const headers = config.headers || this.options.headers;
+    const contentType = headers?.['Content-Type'] || headers?.['content-type'];
+
+    if (contentType === ContentTypeEnum.FormURLEncoded || !Reflect.has(config, 'params')) {
+      return config;
+    }
+
+    return {
+      ...config,
+      paramsSerializer: (params: any) => stringify(params, { arrayFormat: 'brackets' }),
+    };
+  }
+
+  get<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+    return this.request({ ...config, method: 'GET' }, options);
+  }
+
+  post<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+    return this.request({ ...config, method: 'POST' }, options);
+  }
+
+  put<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+    return this.request({ ...config, method: 'PUT' }, options);
+  }
+
+  delete<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+    return this.request({ ...config, method: 'DELETE' }, options);
+  }
+
+  patch<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+    return this.request({ ...config, method: 'PATCH' }, options);
+  }
+
+  /**
+   * 上传文件封装
+
    */
   uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams) {
     const formData = new window.FormData();
@@ -128,54 +219,45 @@ export class VAxios {
       method: 'POST',
       data: formData,
       headers: {
-        'Content-type': 'multipart/form-data;charset=UTF-8',
+        'Content-type': ContentTypeEnum.FormData,
         // @ts-ignore
         ignoreCancelToken: true,
       },
     });
   }
 
-  // 支持Form Data
-  supportFormData(config: AxiosRequestConfig) {
-    const headers = config.headers || this.options.headers;
-    const contentType = headers?.['Content-Type'] || headers?.['content-type'];
+  /**
+   * 请求封装
+   * @param config
+   * @param options
+   */
+  request<T = any>(config: AxiosRequestConfigRetry, options?: RequestOptions): Promise<T> {
+    const { requestOptions } = this.options;
 
-    if (
-      contentType !== 'application/x-www-form-urlencoded;charset=UTF-8' ||
-      !Reflect.has(config, 'data') ||
-      config.method?.toUpperCase() === 'GET'
-    ) {
-      return config;
+    if (requestOptions.throttle !== undefined && requestOptions.debounce !== undefined) {
+      throw new Error('throttle and debounce cannot be set at the same time');
     }
 
-    return {
-      ...config,
-      data: stringify(config.data, { arrayFormat: 'brackets' }),
-    };
+    if (requestOptions.throttle && requestOptions.throttle.delay !== 0) {
+      return new Promise((resolve) => {
+        throttle(() => resolve(this.synthesisRequest(config, options)), requestOptions.throttle.delay);
+      });
+    }
+
+    if (requestOptions.debounce && requestOptions.debounce.delay !== 0) {
+      return new Promise((resolve) => {
+        debounce(() => resolve(this.synthesisRequest(config, options)), requestOptions.debounce.delay);
+      });
+    }
+
+    return this.synthesisRequest(config, options);
   }
 
-  get<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    return this.request({ ...config, method: 'GET' }, options);
-  }
-
-  post<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    return this.request({ ...config, method: 'POST' }, options);
-  }
-
-  put<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    return this.request({ ...config, method: 'PUT' }, options);
-  }
-
-  delete<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    return this.request({ ...config, method: 'DELETE' }, options);
-  }
-
-  patch<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    return this.request({ ...config, method: 'PATCH' }, options);
-  }
-
-  // 请求
-  async request<T = any>(config: AxiosRequestConfigRetry, options?: RequestOptions): Promise<T> {
+  /**
+   * 请求方法
+   * @private
+   */
+  private async synthesisRequest<T = any>(config: AxiosRequestConfigRetry, options?: RequestOptions): Promise<T> {
     let conf: CreateAxiosOptions = cloneDeep(config);
     const transform = this.getTransform();
 
@@ -190,6 +272,8 @@ export class VAxios {
     conf.requestOptions = opt;
 
     conf = this.supportFormData(conf);
+    // 支持params数组参数格式化，因axios默认的toFormData即为brackets方式，无需配置paramsSerializer为qs，有需要可解除注释，参数参考qs文档
+    // conf = this.supportParamsStringify(conf);
 
     return new Promise((resolve, reject) => {
       this.instance

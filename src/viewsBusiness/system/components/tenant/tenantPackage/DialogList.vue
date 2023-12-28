@@ -73,13 +73,15 @@
   </t-dialog>
 </template>
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useRequset } from '@/hooks/web/useRequset';
-import DialogForm from './DialogForm.vue';
+import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
+import { ref, watch } from 'vue';
+
 import { getList, remove } from '@/api/system/tenantPackage';
+import { useRequset } from '@/hooks/web/useRequset';
 import { COLUMNS } from '@/viewsBusiness/system/constant/tenant/tenantPackage/constant';
+
+import DialogForm from './DialogForm.vue';
 
 const props = defineProps({
   visible: {

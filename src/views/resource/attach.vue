@@ -73,14 +73,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useDesign } from '@/hooks/web/useDesign';
+import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
+import { onMounted, ref } from 'vue';
+
+import { getList, remove } from '@/api/resource/attach';
 import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
 import { useRequset } from '@/hooks/web/useRequset';
 import DialogUpload from '@/viewsBusiness/resource/components/attach/DialogUpload.vue';
-import { getList, remove } from '@/api/resource/attach';
 import { COLUMNS } from '@/viewsBusiness/resource/constant/attach/constant';
 
 const { tableVar } = useDesign();

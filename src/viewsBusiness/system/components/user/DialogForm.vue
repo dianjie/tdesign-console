@@ -155,16 +155,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick, inject, onBeforeMount, unref } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { changeDictDataType } from '@/utils';
-import { getTenantSelectList } from '@/api/system/tenant';
-import { getDictData } from '@/api/system/dict';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, inject, nextTick, onBeforeMount, ref, unref, watch } from 'vue';
+
 import { getDeptTree } from '@/api/system/dept';
-import { getRoleTree } from '@/api/system/role';
+import { getDictData } from '@/api/system/dict';
 import { getPostList } from '@/api/system/post';
+import { getRoleTree } from '@/api/system/role';
+import { getTenantSelectList } from '@/api/system/tenant';
 import { getDetail, submit, update } from '@/api/system/user';
+import { changeDictDataType } from '@/utils';
 
 const INITIAL_DATA = {
   tenantId: '',
@@ -363,6 +364,7 @@ const onTenantChange = useDebounceFn((selectValue) => {
   &:first-child {
     margin-top: 15px;
   }
+
   font-size: 16px;
   line-height: 16px;
   color: var(--td-text-color-primary);

@@ -47,11 +47,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { storeToRefs } from 'pinia';
-import { isEmpty, isObject } from 'lodash-es';
-import { useRouter } from 'vue-router';
 import { useDebounceFn } from '@vueuse/core';
+import { isEmpty, isObject } from 'lodash-es';
+import { storeToRefs } from 'pinia';
+import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router';
+
 import { usePermissionStore } from '@/store';
 import type { MenuRoute } from '@/types/interface';
 

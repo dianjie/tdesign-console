@@ -108,20 +108,21 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, reactive, onBeforeMount, onMounted, provide, unref } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import type { TreeDefaultRow } from '@/types/interface';
-import { formatIdName, formatDictValue, changeDictDataType } from '@/utils';
-import { useDesign } from '@/hooks/web/useDesign';
-import { useSetting } from '@/hooks/setting/useSetting';
-import { useRequset } from '@/hooks/web/useRequset';
-import { usePermission } from '@/hooks/web/usePermission';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { onBeforeMount, onMounted, provide, reactive, ref, unref } from 'vue';
+
+import { getLazyList, removeDepts } from '@/api/system/dept';
 import { getDictData } from '@/api/system/dict';
 import { getTenantSelectList } from '@/api/system/tenant';
-import { getLazyList, removeDepts } from '@/api/system/dept';
-import { COLUMNS } from '@/viewsBusiness/system/constant/dept/constant';
+import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
+import { usePermission } from '@/hooks/web/usePermission';
+import { useRequset } from '@/hooks/web/useRequset';
+import type { TreeDefaultRow } from '@/types/interface';
+import { changeDictDataType, formatDictValue, formatIdName } from '@/utils';
 import DialogForm from '@/viewsBusiness/system/components/dept/DialogForm.vue';
+import { COLUMNS } from '@/viewsBusiness/system/constant/dept/constant';
 
 const { tableVar } = useDesign();
 const { getTableHeaderAffixedTop, getLayoutContainer } = useSetting();

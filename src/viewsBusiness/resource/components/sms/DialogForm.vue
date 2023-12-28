@@ -69,8 +69,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick, inject, unref } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
+import { computed, inject, nextTick, ref, unref, watch } from 'vue';
+
 import { getDetail, submit } from '@/api/resource/sms';
 
 const INITIAL_DATA = {

@@ -42,11 +42,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick, onBeforeMount } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { packageSetting, packageInfo } from '@/api/system/tenant';
+import { nextTick, onBeforeMount, ref, watch } from 'vue';
+
 import { getTreeMenu } from '@/api/system/menu';
-import { getSelect, getDetail as packageDetail } from '@/api/system/tenantPackage';
+import { packageInfo, packageSetting } from '@/api/system/tenant';
+import { getDetail as packageDetail, getSelect } from '@/api/system/tenantPackage';
 
 const INITIAL_DATA = {
   packageId: '',

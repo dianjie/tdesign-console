@@ -42,9 +42,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { ref, watch } from 'vue';
+
 import { uploadOss } from '@/api/resource/oss';
 
 const INITIAL_DATA = {

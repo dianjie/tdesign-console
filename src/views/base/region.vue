@@ -149,16 +149,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount, unref, watch } from 'vue';
-import { SearchIcon, AddIcon, DeleteIcon, CloudUploadIcon, CloudDownloadIcon, PlayIcon } from 'tdesign-icons-vue-next';
-import { MessagePlugin, DialogPlugin } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useDesign } from '@/hooks/web/useDesign';
-import { useSetting } from '@/hooks/setting/useSetting';
+import { AddIcon, CloudDownloadIcon, CloudUploadIcon, DeleteIcon, PlayIcon, SearchIcon } from 'tdesign-icons-vue-next';
+import { DialogPlugin, MessagePlugin } from 'tdesign-vue-next';
+import { onBeforeMount, ref, unref, watch } from 'vue';
+
+import { exportRegion, getDetail, getLazyTree, remove, submit } from '@/api/base/region';
 import { getDictData } from '@/api/system/dict';
+import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
 import { changeDictDataType } from '@/utils';
 import { downloadByData } from '@/utils/file/download';
-import { getLazyTree, getDetail, submit, remove, exportRegion } from '@/api/base/region';
 import DialogImport from '@/viewsBusiness/base/components/region/DialogImport.vue';
 
 const { tableVar } = useDesign();

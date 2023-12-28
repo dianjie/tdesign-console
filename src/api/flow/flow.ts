@@ -1,4 +1,4 @@
-import { request, getUrlPrefix } from '@/utils/request';
+import { getUrlPrefix, request } from '@/utils/request';
 import { setObjToUrlParams } from '@/utils/request/utils';
 
 enum Api {

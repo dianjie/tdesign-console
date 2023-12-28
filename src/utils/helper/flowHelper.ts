@@ -1,5 +1,6 @@
 import website from '@/config/website';
-import { isNullOrUnDef, isEmpty } from '../is';
+
+import { isEmpty, isNullOrUnDef } from '../is';
 
 export const getFinalFlowCategory = (val: StrOrNum) => {
   return isNullOrUnDef(val) || isEmpty(val) ? '' : `flow_${val}`;

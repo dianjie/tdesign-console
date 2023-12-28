@@ -1,83 +1,28 @@
 module.exports = {
   defaultSeverity: 'error',
-  ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
-  extends: ['stylelint-config-prettier'],
-  plugins: ['stylelint-less'],
-  customSyntax: 'postcss-html',
+  extends: ['stylelint-config-standard'],
   rules: {
-    'no-duplicate-selectors': null,
-    'function-no-unknown': null,
+    'no-descending-specificity': null,
+    'import-notation': 'string',
+    'no-empty-source': null,
+    'custom-property-pattern': null,
     'selector-class-pattern': null,
     'selector-pseudo-class-no-unknown': [
       true,
       {
-        ignorePseudoClasses: ['deep', 'global'],
+        ignorePseudoClasses: ['deep'],
       },
     ],
-    'selector-pseudo-element-no-unknown': [
-      true,
-      {
-        ignorePseudoElements: ['v-deep'],
-      },
-    ],
-    'at-rule-no-unknown': [
-      true,
-      {
-        ignoreAtRules: [
-          'tailwind',
-          'apply',
-          'variants',
-          'responsive',
-          'screen',
-          'function',
-          'if',
-          'each',
-          'include',
-          'mixin',
-        ],
-      },
-    ],
-    'no-empty-source': null,
-    'string-quotes': null,
-    'named-grid-areas-no-invalid': null,
-    'unicode-bom': 'never',
-    'no-descending-specificity': null,
-    'font-family-no-missing-generic-family-keyword': null,
-    'declaration-colon-space-after': 'always-single-line',
-    'declaration-colon-space-before': 'never',
-    // 'declaration-block-trailing-semicolon': 'always',
-    'rule-empty-line-before': [
-      'always',
-      {
-        ignore: ['after-comment', 'first-nested'],
-      },
-    ],
-    'unit-no-unknown': [true, { ignoreUnits: ['rpx'] }],
+    'media-query-no-invalid': null, // 官方表示此规则应当仅对于原生CSS启用，对于预处理器（Less）不应启用
   },
   overrides: [
     {
-      files: ['*.vue', '**/*.vue', '*.html', '**/*.html'],
-      extends: ['stylelint-config-recommended'],
-      rules: {
-        'keyframes-name-pattern': null,
-        'selector-pseudo-class-no-unknown': [
-          true,
-          {
-            ignorePseudoClasses: ['deep', 'global'],
-          },
-        ],
-        'selector-pseudo-element-no-unknown': [
-          true,
-          {
-            ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted'],
-          },
-        ],
-      },
+      files: ['**/*.html', '**/*.vue'],
+      customSyntax: 'postcss-html',
     },
     {
-      files: ['*.less', '**/*.less'],
+      files: ['**/*.less'],
       customSyntax: 'postcss-less',
-      extends: ['stylelint-config-recommended-vue'],
     },
   ],
 };

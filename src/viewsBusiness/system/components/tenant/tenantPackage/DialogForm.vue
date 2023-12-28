@@ -46,10 +46,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick, onBeforeMount } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { getDetail, submit } from '@/api/system/tenantPackage';
+import { computed, nextTick, onBeforeMount, ref, watch } from 'vue';
+
 import { getTreeMenu } from '@/api/system/menu';
+import { getDetail, submit } from '@/api/system/tenantPackage';
 
 const INITIAL_DATA = {
   packageName: '',

@@ -1,5 +1,6 @@
-import { LAYOUT } from '../constant';
 import DashboardIcon from '@/assets/assets-slide-dashboard.svg';
+
+import { LAYOUT } from '../constant';
 
 export default [
   {

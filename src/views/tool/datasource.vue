@@ -93,14 +93,15 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useDesign } from '@/hooks/web/useDesign';
+import { MessagePlugin, type PageInfo } from 'tdesign-vue-next';
+import { onMounted, ref } from 'vue';
+
+import { getList, remove } from '@/api/tool/datasource';
 import { useSetting } from '@/hooks/setting/useSetting';
+import { useDesign } from '@/hooks/web/useDesign';
 import { useRequset } from '@/hooks/web/useRequset';
 import DialogForm from '@/viewsBusiness/tool/components/datasource/DialogForm.vue';
-import { getList, remove } from '@/api/tool/datasource';
 import { COLUMNS, DRIVER_CLASS } from '@/viewsBusiness/tool/constant/datasource/constant';
 
 const { tableVar } = useDesign();

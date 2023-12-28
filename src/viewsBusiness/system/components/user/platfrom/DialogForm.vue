@@ -28,8 +28,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, nextTick } from 'vue';
 import { MessagePlugin } from 'tdesign-vue-next';
+import { nextTick, ref, watch } from 'vue';
+
 import { getPlatformDetail, updatePlatform } from '@/api/system/user';
 
 const INITIAL_DATA = {

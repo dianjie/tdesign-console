@@ -143,19 +143,20 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, provide, reactive, unref } from 'vue';
-import { MessagePlugin } from 'tdesign-vue-next';
 import { useDebounceFn } from '@vueuse/core';
-import { useDesign } from '@/hooks/web/useDesign';
+import { MessagePlugin } from 'tdesign-vue-next';
+import { onMounted, provide, reactive, ref, unref } from 'vue';
+
+import { getList, getRole, grant, grantTree, remove } from '@/api/system/role';
+import { getTenantSelectList } from '@/api/system/tenant';
 import { useSetting } from '@/hooks/setting/useSetting';
-import { useRequset } from '@/hooks/web/useRequset';
+import { useDesign } from '@/hooks/web/useDesign';
 import { usePermission } from '@/hooks/web/usePermission';
+import { useRequset } from '@/hooks/web/useRequset';
 import type { TreeDefaultRow } from '@/types/interface';
 import { formatIdName } from '@/utils';
 import DialogForm from '@/viewsBusiness/authority/components/role/DialogForm.vue';
-import { getList, remove, grantTree, getRole, grant } from '@/api/system/role';
 import { COLUMNS } from '@/viewsBusiness/authority/constant/role/constant';
-import { getTenantSelectList } from '@/api/system/tenant';
 
 const { tableVar } = useDesign();
 const { getTableHeaderAffixedTop, getLayoutContainer } = useSetting();

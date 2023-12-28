@@ -1,6 +1,7 @@
 import { computed } from 'vue';
-import { useSettingStore } from '@/store';
+
 import { prefix } from '@/config/global';
+import { useSettingStore } from '@/store';
 
 export function useSetting() {
   const settingStore = useSettingStore();

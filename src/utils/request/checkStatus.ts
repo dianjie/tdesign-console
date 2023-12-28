@@ -1,6 +1,7 @@
 import { DialogPlugin, MessagePlugin } from 'tdesign-vue-next';
-import type { ErrorMessageMode } from '@/types/axios';
+
 import { getUserStore } from '@/store';
+import type { ErrorMessageMode } from '@/types/axios';
 
 export function checkStatus(status: number, msg: string, errorMessageMode: ErrorMessageMode = 'message'): void {
   let errMessage = '';

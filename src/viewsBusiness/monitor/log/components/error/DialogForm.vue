@@ -68,7 +68,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, nextTick } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
+
 import { getDetail } from '@/api/log/error';
 
 const INITIAL_DATA = {

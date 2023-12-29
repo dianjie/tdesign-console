@@ -26,8 +26,12 @@
           <a href="https://pinia.vuejs.org" rel="nofollow"
             ><img alt="Pinia" src="https://img.shields.io/badge/Store-Pinia-f7d336" style="max-width: 100%"
           /></a>
-          <a href="https://nodejs.org/en/about/releases/" rel="nofollow">
-            <img alt="node-current" src="https://img.shields.io/node/v/vite" style="max-width: 100%" />
+          <a href="https://nodejs.org/en" rel="nofollow">
+            <img
+              alt="node version"
+              src="https://img.shields.io/badge/node%3E%3D16.x-brightgreen"
+              style="max-width: 100%"
+            />
           </a>
           <a href="https://github.com/dianjie/tdesign-console/blob/main/LICENSE">
             <img

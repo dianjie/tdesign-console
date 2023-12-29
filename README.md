@@ -4,7 +4,7 @@
 [![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Develop-Vite-747bff)](https://vitejs.dev)
 [![Pinia](https://img.shields.io/badge/Store-Pinia-f7d336)](https://pinia.vuejs.org)
-[![Static Badge]](https://img.shields.io/badge/node-16.x-brightgreen)
+[![Node](https://img.shields.io/badge/node%3E%3D16.x-brightgreen)](https://nodejs.org/en)
 [![GitHub](https://img.shields.io/github/license/dianjie/tdesign-console)](https://github.com/dianjie/tdesign-console/blob/main/LICENSE)
 
 抱着学习 Vue3 的心态，就将原本[BladeX](https://saber.bladex.vip/) Vue2 版本的基础后台管理用 Vue3 写了出来，后续我会将大部分页面的列表、详情接口给 MOCK 出来。如果刚好你有购买 Ta 们的服务，就直接部署最新版的接口，然后配置好`src\config\proxy.ts`，`src\config\website.ts`这两个文件，用现成接口预览吧。

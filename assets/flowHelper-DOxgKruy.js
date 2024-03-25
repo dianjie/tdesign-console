@@ -1,1 +1,0 @@
-import{aN as r,aO as s,n as a}from"./index-DSNeq6T3.js";const l=t=>r(t)||s(t)?"":`flow_${t}`,g=()=>a.flowDesign["mock"],c=()=>g()||"",f=(t,o)=>{const e=t.filter(n=>n.routeKey===o);return e.length===0?[]:e[0].routeValue};export{c as a,f,l as g};

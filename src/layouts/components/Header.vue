@@ -64,8 +64,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type PropType } from 'vue';
-import { useRouter } from 'vue-router';
+import { computed, type PropType, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 import LogoFull from '@/assets/assets-logo-full.svg?component';
 import { prefix } from '@/config/global';
@@ -119,7 +119,16 @@ const toggleSettingPanel = () => {
   });
 };
 
-const active = computed(() => getActive());
+const route = useRoute();
+const active = ref('');
+
+watch(
+  () => route.path,
+  () => {
+    active.value = getActive(route);
+  },
+  { immediate: true },
+);
 
 const layoutCls = computed(() => [`${prefix}-header-layout`]);
 

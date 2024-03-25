@@ -12,7 +12,7 @@ import proxyConfig from './src/config/proxy';
 const CWD = process.cwd();
 
 // https://vitejs.dev/config/
-export default ({ command, mode }: ConfigEnv): UserConfig => {
+export default ({ mode }: ConfigEnv): UserConfig => {
   const { VITE_BASE_URL } = loadEnv(mode, CWD);
   return {
     base: VITE_BASE_URL,
@@ -39,12 +39,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       vueJsx(),
       viteMockServe({
         mockPath: 'mock',
-        localEnabled: mode === 'mock',
-        prodEnabled: command !== 'serve' && mode === 'mock',
-        injectCode: `
-          import { setupProdMockServer } from './mockProdServer';
-          setupProdMockServer();
-        `,
+        enable: mode === 'mock',
       }),
       svgLoader(),
     ],

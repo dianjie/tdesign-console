@@ -1,1 +1,0 @@
-import{aN as r,aO as s,n as a}from"./index-c2e89b2e.js";const l=t=>r(t)||s(t)?"":`flow_${t}`,g=()=>{const t="mock";return a.flowDesign[t]},c=()=>g()||"",f=(t,e)=>{const o=t.filter(n=>n.routeKey===e);return o.length===0?[]:o[0].routeValue};export{c as a,f,l as g};

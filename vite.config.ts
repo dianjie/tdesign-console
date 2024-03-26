@@ -2,9 +2,9 @@ import createVuePlugin from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import path from 'path';
 import { type ConfigEnv, loadEnv, type UserConfig } from 'vite';
-import { viteMockServe } from 'vite-plugin-mock';
 import svgLoader from 'vite-svg-loader';
 
+import { createMock } from './build/vite/mock';
 import { createProxy } from './build/vite/proxy';
 import { prefix } from './src/config/global';
 import proxyConfig from './src/config/proxy';
@@ -12,7 +12,7 @@ import proxyConfig from './src/config/proxy';
 const CWD = process.cwd();
 
 // https://vitejs.dev/config/
-export default ({ mode }: ConfigEnv): UserConfig => {
+export default ({ command, mode }: ConfigEnv): UserConfig => {
   const { VITE_BASE_URL } = loadEnv(mode, CWD);
   return {
     base: VITE_BASE_URL,
@@ -34,15 +34,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         },
       },
     },
-    plugins: [
-      createVuePlugin(),
-      vueJsx(),
-      viteMockServe({
-        mockPath: 'mock',
-        enable: mode === 'mock',
-      }),
-      svgLoader(),
-    ],
+    plugins: [createVuePlugin(), vueJsx(), createMock(command, mode), svgLoader()],
 
     server: {
       port: 3002,

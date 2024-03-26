@@ -1,1 +1,0 @@
-import{p as t}from"./useDesign-CbWcZHFZ.js";import{u as o,R as r}from"./index-C3aixgX8.js";function i(){const e=o();return{getTableHeaderAffixedTop:r(()=>e.isUseTabsRouter?48:0),getLayoutContainer:()=>document.querySelector(`.${t}-layout`)}}export{i as u};

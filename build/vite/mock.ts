@@ -28,7 +28,7 @@ export function createMock(command: string, mode: string) {
         `;
         return {
           map: null,
-          code: `${injectCode}\n${code}`,
+          code: `${code}\n${injectCode}`,
         };
       }
       return null;

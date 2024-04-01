@@ -17,8 +17,8 @@
 
 <script setup lang="ts">
 import { union } from 'lodash-es';
-import { computed, onMounted, type PropType, ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { computed, onMounted, type PropType } from 'vue';
+import { useRouter } from 'vue-router';
 
 import AssetLogoFull from '@/assets/assets-logo-full.svg?component';
 import AssetLogo from '@/assets/assets-t-logo.svg?component';
@@ -66,19 +66,10 @@ const props = defineProps({
 
 const collapsed = computed(() => useSettingStore().isSidebarCompact);
 
-const route = useRoute();
-const active = ref('');
-
-watch(
-  () => route.path,
-  () => {
-    active.value = getActive(route);
-  },
-  { immediate: true },
-);
+const active = computed(() => getActive());
 
 const defaultExpanded = computed(() => {
-  const path = active.value;
+  const path = getActive();
   const parentPath = path.substring(0, path.lastIndexOf('/'));
   const expanded = getRoutesExpanded();
   return union(expanded, parentPath === '' ? [] : [parentPath]);

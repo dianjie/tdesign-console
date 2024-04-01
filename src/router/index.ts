@@ -1,5 +1,5 @@
 import { uniq } from 'lodash-es';
-import { createRouter, createWebHashHistory, RouteLocationNormalizedLoaded, type RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router';
 
 import type { AppRouteRecordRaw } from '@/router/types';
 
@@ -66,7 +66,10 @@ export const getRoutesExpanded = () => {
   return uniq(expandedRoutes);
 };
 
-export const getActive = (route: RouteLocationNormalizedLoaded, maxLevel = 3): string => {
+export const getActive = (maxLevel = 3): string => {
+  // 非组件内调用必须通过Router实例获取当前路由
+  const route = router.currentRoute.value;
+
   if (!route.path) {
     return '';
   }

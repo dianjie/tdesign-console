@@ -29,7 +29,7 @@
           <a href="https://nodejs.org/en" rel="nofollow">
             <img
               alt="node version"
-              src="https://img.shields.io/badge/node%3E%3D16.x-brightgreen"
+              src="https://img.shields.io/badge/node%3E%3D18.x-brightgreen"
               style="max-width: 100%"
             />
           </a>

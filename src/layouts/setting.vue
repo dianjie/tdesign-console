@@ -71,7 +71,13 @@
         </t-form-item>
 
         <div class="setting-group-title">元素开关</div>
-        <t-form-item v-show="formData.layout === 'side'" label="显示 Header" name="showHeader">
+        <t-form-item label="侧边栏模式" name="sideMode">
+          <t-radio-group v-model="formData.sideMode" class="side-mode-radio">
+            <t-radio-button key="light" value="light" label="明亮" />
+            <t-radio-button key="dark" value="dark" label="暗黑" />
+          </t-radio-group>
+        </t-form-item>
+        <t-form-item v-show="formData.layout === 'side'" label="显示顶栏" name="showHeader">
           <t-switch v-model="formData.showHeader" />
         </t-form-item>
         <t-form-item label="显示 Breadcrumbs" name="showBreadcrumb">
@@ -83,6 +89,9 @@
         <t-form-item label="使用 多标签Tab页" name="isUseTabsRouter">
           <t-switch v-model="formData.isUseTabsRouter"></t-switch>
         </t-form-item>
+        <t-form-item label="菜单自动折叠" name="menuAutoCollapsed">
+          <t-switch v-model="formData.menuAutoCollapsed"></t-switch>
+        </t-form-item>
       </t-form>
       <div class="setting-info">
         <p>请复制后手动修改配置文件: /src/config/style.ts</p>
@@ -92,11 +101,10 @@
   </t-drawer>
 </template>
 <script setup lang="ts">
+import { useClipboard } from '@vueuse/core';
 import type { PopupVisibleChangeContext } from 'tdesign-vue-next';
 import { MessagePlugin } from 'tdesign-vue-next';
-import { Color } from 'tvision-color';
 import { computed, onMounted, ref, watchEffect } from 'vue';
-import useClipboard from 'vue-clipboard3';
 
 import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
@@ -106,7 +114,6 @@ import Thumbnail from '@/components/thumbnail/index.vue';
 import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
 import STYLE_CONFIG from '@/config/style';
 import { useSettingStore } from '@/store';
-import { generateColorMap, insertThemeStylesheet } from '@/utils/color';
 
 const settingStore = useSettingStore();
 
@@ -122,7 +129,7 @@ const initStyleConfig = () => {
   const styleConfig = STYLE_CONFIG;
   for (const key in styleConfig) {
     if (Object.prototype.hasOwnProperty.call(styleConfig, key)) {
-      styleConfig[key] = settingStore[key];
+      (styleConfig[key as keyof typeof STYLE_CONFIG] as any) = settingStore[key as keyof typeof STYLE_CONFIG];
     }
   }
 
@@ -148,19 +155,7 @@ const showSettingPanel = computed({
 });
 
 const changeColor = (hex: string) => {
-  const { colors: newPalette, primary: brandColorIndex } = Color.getColorGradations({
-    colors: [hex],
-    step: 10,
-    remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
-  })[0];
-  const { mode } = settingStore;
-
-  const colorMap = generateColorMap(hex, newPalette, mode as 'light' | 'dark', brandColorIndex);
-
-  settingStore.addColor({ [hex]: colorMap });
   formData.value.brandTheme = hex;
-  settingStore.updateConfig({ ...formData.value, brandTheme: hex });
-  insertThemeStylesheet(hex, colorMap, mode as 'light' | 'dark');
 };
 
 onMounted(() => {
@@ -176,9 +171,9 @@ const onPopupVisibleChange = (visible: boolean, context: PopupVisibleChangeConte
 };
 
 const handleCopy = () => {
-  const text = JSON.stringify(formData.value, null, 4);
-  const { toClipboard } = useClipboard();
-  toClipboard(text)
+  const sourceText = JSON.stringify(formData.value, null, 4);
+  const { copy } = useClipboard({ source: sourceText });
+  copy()
     .then(() => {
       MessagePlugin.closeAll();
       MessagePlugin.success('复制成功');
@@ -267,8 +262,7 @@ watchEffect(() => {
   line-height: 22px;
   margin: 32px 0 24px;
   text-align: left;
-  /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
-  font-family: 'PingFang SC';
+  font-family: 'PingFang SC', var(--td-font-family);
   font-style: normal;
   font-weight: 500;
   color: var(--td-text-color-primary);
@@ -303,6 +297,10 @@ watchEffect(() => {
     width: 100%;
     justify-content: space-between;
     align-items: center;
+
+    &.side-mode-radio {
+      justify-content: end;
+    }
   }
 
   .t-radio-group.t-size-m .t-radio-button {

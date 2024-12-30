@@ -28,19 +28,21 @@
 import type { PropType } from 'vue';
 import { computed } from 'vue';
 
+import { getActive } from '@/router';
 import type { MenuRoute } from '@/types/interface';
 
 type ListItemType = MenuRoute & { icon?: string };
 
-const props = defineProps({
+const { navData } = defineProps({
   navData: {
     type: Array as PropType<MenuRoute[]>,
     default: () => [],
   },
 });
 
+const active = computed(() => getActive());
+
 const list = computed(() => {
-  const { navData } = props;
   return getMenuList(navData);
 });
 
@@ -50,7 +52,7 @@ const menuIcon = (item: ListItemType) => {
   return RenderIcon;
 };
 
-const getMenuList = (list: MenuRoute[]): ListItemType[] => {
+const getMenuList = (list: MenuRoute[], basePath?: string): ListItemType[] => {
   if (!list || list.length === 0) {
     return [];
   }
@@ -60,11 +62,13 @@ const getMenuList = (list: MenuRoute[]): ListItemType[] => {
   });
   return list
     .map((item) => {
+      const path = basePath && !item.path.includes(basePath) ? `${basePath}/${item.path}` : item.path;
+
       return {
-        path: item.path,
+        path,
         title: item.meta?.title,
         icon: item.meta?.icon,
-        children: getMenuList(item.children),
+        children: getMenuList(item.children, path),
         meta: item.meta,
         redirect: item.redirect,
       };
@@ -81,6 +85,16 @@ const getHref = (item: MenuRoute) => {
 };
 
 const getPath = (item: ListItemType) => {
+  const activeLevel = active.value.split('/').length;
+  const pathLevel = item.path.split('/').length;
+  if (activeLevel > pathLevel && active.value.startsWith(item.path)) {
+    return active.value;
+  }
+
+  if (active.value === item.path) {
+    return active.value;
+  }
+
   return item.meta?.single ? item.redirect : item.path;
 };
 

@@ -74,6 +74,7 @@ const changeSearchFocus = (value: boolean) => {
 
       .t-input__inner {
         transition: background @anim-duration-base linear;
+        background: none;
       }
 
       &:hover {

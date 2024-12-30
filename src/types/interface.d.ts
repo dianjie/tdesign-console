@@ -1,7 +1,5 @@
 import { LocationQueryRaw, RouteRecordName } from 'vue-router';
 
-import STYLE_CONFIG from '@/config/style';
-
 export interface RouteMeta {
   title?: string | Record<string, string>;
   icon?: string;
@@ -29,14 +27,6 @@ export interface MenuRoute {
 }
 
 export type ModeType = 'dark' | 'light';
-
-export type SettingType = typeof STYLE_CONFIG;
-
-export type ClassName = { [className: string]: any } | ClassName[] | string;
-
-export type CommonObjType = {
-  [key: string]: string | number;
-};
 
 export interface NotificationItem {
   id: string;

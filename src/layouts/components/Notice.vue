@@ -85,7 +85,7 @@ const goDetail = () => {
   margin: calc(0px - var(--td-comp-paddingTB-xs)) calc(0px - var(--td-comp-paddingLR-s));
 
   .empty-list {
-    height: calc(100% - 120px);
+    // height: calc(100% - 120px);
     text-align: center;
     padding: var(--td-comp-paddingTB-xxl) 0;
     font: var(--td-font-body-medium);

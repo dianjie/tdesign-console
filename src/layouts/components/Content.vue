@@ -1,8 +1,10 @@
 <template>
   <router-view v-if="!isRefreshing" v-slot="{ Component }">
-    <keep-alive :include="aliveViews">
-      <component :is="Component" />
-    </keep-alive>
+    <transition name="fade" mode="out-in">
+      <keep-alive :include="aliveViews">
+        <component :is="Component" />
+      </keep-alive>
+    </transition>
   </router-view>
   <frame-page />
 </template>
@@ -45,3 +47,14 @@ const isRefreshing = computed(() => {
   return refreshing;
 });
 </script>
+<style lang="less" scoped>
+.fade-leave-active,
+.fade-enter-active {
+  transition: opacity @anim-duration-slow @anim-time-fn-easing;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

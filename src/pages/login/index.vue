@@ -30,7 +30,7 @@ export default {
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import TdesignSetting from '@/layouts/setting/page-config.vue';
+import TdesignSetting from '@/layouts/setting.vue';
 
 import LoginHeader from './components/Header.vue';
 import Login from './components/Login.vue';
